@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+:root {
+    --cor0: #940707;
+    --cor1: #d9d9d9;
+    --cor2: #77b513;
+    --cor3: #4a0000;
+    --cor4: #ababab;
+}
+
+
+body {
+    background-image: linear-gradient(to bottom, var(--cor0), var(--cor3), var(--cor0));
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+
+header>h1 {
+    text-align: center;
+    color: white;
+    display: inline-block;
+    margin: 20px calc(50% - 250px) 0px;
+    width: 500px;
+    text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
+}
+
+main {
+    border: var(--cor3) solid 0.1em;
+    max-width: 1000px;
+    height: 600px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+main > div > img {
+    max-width: 324px;
+    max-height: 284px;
+    margin-left: calc(50% - 165px); 
+    margin-top: 150px;
+}
+
+.sombra{
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
+}
+
+div {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+    
+}
+
+#container-a {
+    background-color: var(--cor1);
+}
+
+#container-b {
+    background-color: white;
+    float: right;
+}
+
+#cadastro {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 120px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.233);
+}
+
+#login {
+    margin-left: calc(50% - 128px);
+    margin-top: 150px;
+}
+
+
+footer {
+    background-image: linear-gradient(to top, var(--cor0), #6e030394);
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    padding: 10px 0px 5px 0px;
+    text-align: center;
+}
+
+footer > p {
+    margin: 0px 0px 13px 0px;
+}
+
+footer > p > img {
+    max-width: 20px;
+}
+
+
+
+
+
