@@ -3,19 +3,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --cor0: #940707;
     --cor1: #d9d9d9;
     --cor2: #77b513;
     --cor3: #4a0000;
     --cor4: #ababab;
+
 }
 
 
 body {
     background-image: linear-gradient(to bottom, var(--cor0), var(--cor3), var(--cor0));
     background-repeat: no-repeat;
-    min-height: 100vh;
+    height: 100%;
 }
 
 
@@ -29,23 +35,28 @@ header>h1 {
 }
 
 main {
-    border: var(--cor3) solid 0.1em;
-    max-width: 1000px;
+    border: solid black 2px;
+    max-width: 60rem;
     height: 600px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 40px;
+  
 }
 
-main > div > img {
-    max-width: 324px;
+#container-b img {
+    max-width: 100%;
     max-height: 284px;
-    margin-left: calc(50% - 165px); 
     margin-top: 150px;
 }
 
-.sombra{
-    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
-}
+ .container{
+        display: flex;
+        padding: 0 !important;
+        box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301) !important;
+       
+    }
+    
+
 
 div {
     width: 50%;
@@ -54,13 +65,17 @@ div {
     
 }
 
+
 #container-a {
     background-color: var(--cor1);
+    border: solid 2px black;
+
 }
 
 #container-b {
     background-color: white;
-    float: right;
+    border: solid 2px black;
+    
 }
 
 #cadastro {
@@ -71,15 +86,29 @@ div {
 }
 
 #login {
-    margin-left: calc(50% - 128px);
-    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 }
 
 
+#login input{
+    text-align: center;
+    background-color: #ababab; 
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+#login button{
+    background-color: #830101;
+    width: 100%;
+}
+
 footer {
     background-image: linear-gradient(to top, var(--cor0), #6e030394);
-    bottom: 0;
-    position: fixed;
+    margin: 4rem 0rem 0rem 0rem;
     width: 100%;
     padding: 10px 0px 5px 0px;
     text-align: center;
@@ -87,12 +116,56 @@ footer {
 
 footer > p {
     margin: 0px 0px 13px 0px;
+    color: white;
 }
 
 footer > p > img {
     max-width: 20px;
 }
 
+
+@media screen and (max-width:991px) {
+
+    main {
+        border: none !important
+    }
+    
+}
+
+@media screen and (max-width : 576px) {
+
+    #login input{
+        
+        width: auto;
+    }
+ 
+    
+}
+
+@media screen and (max-width : 465px) {
+
+    #container-b{
+        
+        display: none;
+    }
+
+    #container-a{
+        width: 100%;
+        margin: 10px;
+        background-color: var(--cor1);
+    }
+
+    #login input{
+        background-color:var(--cor4);
+        color: white !important;
+    }
+ 
+
+    #container-b img{
+        display: flex !important;
+    }
+    
+}
 
 
 
