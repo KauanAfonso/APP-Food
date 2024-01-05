@@ -22,7 +22,16 @@ body {
     background-image: linear-gradient(to bottom, var(--cor0), var(--cor3), var(--cor0));
     background-repeat: no-repeat;
     height: 100%;
+ 
+    
+
 }
+
+
+#criarConta{
+    display: none;
+}
+
 
 
 header>h1 {
@@ -101,7 +110,7 @@ div {
     width: 100%;
 }
 
-#login button{
+#login  button{
     background-color: #830101;
     width: 100%;
 }
@@ -110,6 +119,7 @@ footer {
     background-image: linear-gradient(to top, var(--cor0), #6e030394);
     margin: 4rem 0rem 0rem 0rem;
     width: 100%;
+
     padding: 10px 0px 5px 0px;
     text-align: center;
 }
@@ -121,6 +131,10 @@ footer > p {
 
 footer > p > img {
     max-width: 20px;
+}
+
+#EtecImg{
+    display: none;
 }
 
 
@@ -142,8 +156,9 @@ footer > p > img {
     
 }
 
-@media screen and (max-width : 465px) {
+@media screen and (max-width : 576px) {
 
+     
     #container-b{
         
         display: none;
@@ -152,18 +167,40 @@ footer > p > img {
     #container-a{
         width: 100%;
         margin: 10px;
-        background-color: var(--cor1);
+        background-color: white;
+   
     }
 
     #login input{
-        background-color:var(--cor4);
+        background-color:rgb(200, 200, 200);
         color: white !important;
+        position: relative;
     }
  
 
     #container-b img{
         display: flex !important;
     }
+
+
+    #EtecImg{
+        display: inline-block;
+        width: 10rem;
+        position: absolute;
+        top: 143px;
+
+    }
+
+    #criarConta{
+        display: inline;
+    }
+ 
+
+    footer{
+        background-image: none;
+    }
+
+ 
     
 }
 

@@ -30,7 +30,8 @@ header>div {
     position: relative;
 }
 
-header>div>nav>a {
+
+.navegacao a ,  .navegacao button {
     color: white;
     background-color: #6b01019a;
     padding: 5px 30px;
@@ -39,17 +40,48 @@ header>div>nav>a {
     border-radius: 15px;
 }
 
-header>div>nav>button {
-    color: white;
-    background-color: #6b01019a;
-    padding: 5px 30px;
-    margin-right: 10px;
-    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
-    border-radius: 15px;
+#conteudoMenuMobile{
+    display: none;
 }
 
-header>div>nav {
-    margin-left: 70%;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#mn-hamburguer{
+    display: none;
+    background: transparent;
+    border: none;
+    width: 2rem;
+}
+
+#mn-hamburguer img{
+    width: 2rem;
+}
+
+.nome{
+    display: flex;
+    margin-left: 3.2rem;
+    margin-top: 3rem;
+    justify-content: center;
+
+}
+
+.nome h1 {
+    
+    font-size: 1.3rem;
+
+}
+
+.navegacao  {
+    
+
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 5px;
     padding: 15px 5px 5px 5px;
 }
 
@@ -71,6 +103,8 @@ header>div>button {
     width: 150px;
     height: 35px;
     text-align: center;
+    position: absolute;
+    top: 157px;
 }
 
 header>img {
@@ -135,3 +169,83 @@ footer {
     text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
 }
 
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+   
+}
+
+#conteudoMenuMobile {
+    animation: fadeInOut 3s ; /* Adicione a animação ao elemento */
+}
+
+
+@media screen and (max-width:992px) {
+
+
+    header>img {
+       top: 6%;
+        width: 350px;
+    }
+    
+
+    
+}
+
+@media screen and (max-width:768px) {
+
+
+    header>img {
+       top: 15%;
+        width: 250px;
+    }
+    
+
+    
+}
+
+@media screen and (max-width:576px) {
+
+    header>img {
+        top: 15%;
+         width: 280px;
+     }
+
+    nav .nome , .navegacao{
+        display: none;
+    }
+
+    #mn-hamburguer{
+        display: flex;
+        justify-content:flex-start;
+        color: white;
+        font-size: 3em;
+    }
+
+    #conteudoMenuMobile{
+        display: none;
+        background-color: #4a0000;
+        flex-direction: column;
+        width: 50%;
+        height: 100%;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        padding: 20px;
+        color: white;
+    }
+
+    #conteudoMenuMobile a{
+        text-decoration: none;
+        color: white;
+        margin-top: 40px;
+        cursor:pointer;
+    }
+
+  
+}

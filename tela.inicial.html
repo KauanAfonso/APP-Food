@@ -8,23 +8,54 @@
   <link rel="stylesheet" href="style.inicial.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="script.js"></script>
 </head>
 
 
 <body>
 
+  <div id="conteudoMenuMobile">
+
+    <nav>
+    <h5>SEJA BEM-VINDO (NOME)</h5>
+     
+    <p id="fecharMenu" style="font-size: 1rem; cursor: pointer;" onclick="toggleMenu()">X</p>
+  </nav>
+
+    <a href="#">SOBRE</a>
+    <a href="#">LOGIN</a>
+    <a href="#">SAIR</a>
+
+    <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+    aria-controls="offcanvasRight">CARRINHO</a>
+ 
+
+  </div>
+
   <header>
     <div>
+ 
       <nav>
-        <a href="#">SOBRE</a>
-        <a href="#">LOGIN</a>
-        <a href="#">SAIR</a>
+        <div class="nome">
+        <h1>SEJA BEM-VINDO (NOME)</h1>  </div>    
+    
+        <button id="mn-hamburguer" onclick="toggleMenu()">≣</button>
 
+          
+        <div class="navegacao">
+          <a href="#">SOBRE</a>
+          <a href="#">LOGIN</a>
+          <a href="#">SAIR</a>
+
+          
         <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasRight">CARRINHO</button>
+        aria-controls="offcanvasRight">CARRINHO</button>
+        </div>
 
-        <div style="background-color: #4a0000; color: white;" class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-          aria-labelledby="offcanvasRightLabel">
+
+        <div style="background-color: #4a0000; color: white;" class="offcanvas offcanvas-end" tabindex="-1"
+          id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasRightLabel">CARRINHO:</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -39,7 +70,8 @@
       </nav>
     </div>
 
-    <h1>SEJA BEM-VINDO (NOME)</h1>
+  
+
 
     <div class="btn-comprar">
 
