@@ -12,9 +12,7 @@
 }
 
 
-body {
-    
-}
+body {}
 
 
 header {
@@ -31,7 +29,8 @@ header>div {
 }
 
 
-.navegacao a ,  .navegacao button {
+.navegacao a,
+.navegacao button {
     color: white;
     background-color: #6b01019a;
     padding: 5px 30px;
@@ -40,7 +39,7 @@ header>div {
     border-radius: 15px;
 }
 
-#conteudoMenuMobile{
+#conteudoMenuMobile {
     display: none;
 }
 
@@ -48,21 +47,21 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
-#mn-hamburguer{
+#mn-hamburguer {
     display: none;
     background: transparent;
     border: none;
     width: 2rem;
 }
 
-#mn-hamburguer img{
+#mn-hamburguer img {
     width: 2rem;
 }
 
-.nome{
+.nome {
     display: flex;
     margin-left: 3.2rem;
     margin-top: 3rem;
@@ -71,13 +70,13 @@ nav {
 }
 
 .nome h1 {
-    
+
     font-size: 1.3rem;
 
 }
 
-.navegacao  {
-    
+.navegacao {
+
 
     flex-wrap: wrap;
     gap: 2px;
@@ -110,7 +109,7 @@ header>div>button {
 header>img {
     position: absolute;
     left: 50%;
-   top: -1%;
+    top: -1%;
     max-width: 500px;
 }
 
@@ -123,11 +122,9 @@ header>img {
     margin-left: 50px;
 }
 
-main {
-    
-}
+main {}
 
-.position-div{
+.position-div {
     position: absolute;
     width: 800px;
     height: 400px;
@@ -136,32 +133,32 @@ main {
 
 }
 
-.img1{
+.img1 {
     max-width: 140px;
     position: absolute;
     left: calc(50% - 275px);
 }
 
-.img2{
+.img2 {
     top: 180px;
     width: 140px;
     position: absolute;
     left: calc(50% - 275px);
 }
 
-.img3{
+.img3 {
     top: 160px;
     max-width: 340px;
     position: absolute;
-   
-    left: calc(50% - 70px); 
+
+    left: calc(50% - 70px);
 }
 
 footer {
     background-image: linear-gradient(to top, var(--cor0), #c22a2a);
     bottom: 0;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100px;
     padding: 10px 0px 5px 0px;
     text-align: center;
@@ -174,14 +171,16 @@ footer {
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 1;
     }
-   
+
 }
 
 #conteudoMenuMobile {
-    animation: fadeInOut 3s ; /* Adicione a animação ao elemento */
+    animation: fadeInOut 3s;
+    /* Adicione a animação ao elemento */
 }
 
 
@@ -189,45 +188,53 @@ footer {
 
 
     header>img {
-       top: 6%;
+        top: 6%;
         width: 350px;
     }
-    
 
-    
+
+
 }
 
 @media screen and (max-width:768px) {
 
 
     header>img {
-       top: 15%;
+        top: 15%;
         width: 250px;
     }
-    
 
-    
+
+    header>div>button {
+        top: 139px;
+
+    }
+
+
+
 }
 
 @media screen and (max-width:576px) {
 
     header>img {
         top: 15%;
-         width: 280px;
-     }
+        width: 280px;
+        object-fit: contain;
+    }
 
-    nav .nome , .navegacao{
+    nav .nome,
+    .navegacao {
         display: none;
     }
 
-    #mn-hamburguer{
+    #mn-hamburguer {
         display: flex;
-        justify-content:flex-start;
+        justify-content: flex-start;
         color: white;
         font-size: 3em;
     }
 
-    #conteudoMenuMobile{
+    #conteudoMenuMobile {
         display: none;
         background-color: #4a0000;
         flex-direction: column;
@@ -240,12 +247,120 @@ footer {
         color: white;
     }
 
-    #conteudoMenuMobile a{
+    #conteudoMenuMobile a {
         text-decoration: none;
         color: white;
         margin-top: 40px;
-        cursor:pointer;
+        cursor: pointer;
     }
 
-  
+    /*---------------------------------------*/
+
+
+    #img1 {
+        position: absolute;
+        left: calc(50% - 200px);
+    }
+
+    #img2 {
+        position: absolute;
+        left: calc(50% - 200px);
+    }
+
+    #img3 {
+        top: 180px;
+        width: 140px;
+        position: absolute;
+        left: calc(50% - 400px);
+    }
+
+    #img4 {
+        position: absolute;
+        left: calc(50% - 200px);
+    }
+
+    #img5 {
+        position: absolute;
+        left: calc(50% - 200px);
+    }
+
+    .img1 {
+        max-width: 140px;
+        width: 300px;
+        position: absolute;
+        left: calc(50% - 275px);
+    }
+
+
+    .img2 {
+        top: 180px;
+        width: 140px;
+        position: absolute;
+        left: calc(50% - 275px);
+    }
+
+    .img3 {
+        top: 160px;
+        max-width: 350px;
+        position: absolute;
+        top: 370px;
+        left: calc(20% - 70px);
+    }
+
+
+    @media screen and (max-width: 450px) {
+
+        header>div>button {
+            top: 179px;
+            width: 110px;
+        }
+
+        header>img {
+            top: 20%;
+            width: 185px;
+        }
+
+
+    }
+
+    @media screen and (max-width: 394px) {
+
+        header>div>button {
+
+            top: 169px;
+        }
+
+        header>img {
+            top: 21%;
+            width: 185px;
+        }
+
+        header>div>h2 {
+            font-size: 2.5em;
+        }
+
+        #img1 {
+            left: calc(50% - 150px);
+        }
+
+        #img2 {
+            left: calc(50% - 200px);
+        }
+
+        #img3 {
+            top: 180px;
+            width: 140px;
+            left: calc(50% - 400px);
+        }
+
+        #img4 {
+            left: calc(50% - 150px);
+        }
+
+        #img5 {
+            max-width: 300px;
+            left: calc(50% - 150px);
+        }
+    }
+
 }
