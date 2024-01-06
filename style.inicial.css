@@ -216,7 +216,7 @@ footer {
 
 @media screen and (max-width:576px) {
     body {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
       }
 
       header>div>button {

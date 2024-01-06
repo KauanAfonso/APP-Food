@@ -21,7 +21,7 @@
 body {
     background-image: linear-gradient(to bottom, var(--cor0), var(--cor3), var(--cor0));
     background-repeat: no-repeat;
-    height: 100%;
+    height: 100vh;
  
     
 
@@ -116,10 +116,9 @@ div {
 }
 
 footer {
-    background-image: linear-gradient(to top, var(--cor0), #6e030394);
+
     margin: 4rem 0rem 0rem 0rem;
     width: 100%;
-
     padding: 10px 0px 5px 0px;
     text-align: center;
 }
