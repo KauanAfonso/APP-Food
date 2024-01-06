@@ -215,6 +215,15 @@ footer {
 }
 
 @media screen and (max-width:576px) {
+    body {
+        overflow-x: hidden;
+      }
+
+      header>div>button {
+        top: 180px;
+        
+    }
+      
 
     header>img {
         top: 15%;
