@@ -21,7 +21,7 @@
 body {
     background-image: linear-gradient(to bottom, var(--cor0), var(--cor3), var(--cor0));
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
  
     
 
@@ -116,7 +116,7 @@ div {
 }
 
 footer {
-
+    background-color: transparent;
     margin: 4rem 0rem 0rem 0rem;
     width: 100%;
     padding: 10px 0px 5px 0px;

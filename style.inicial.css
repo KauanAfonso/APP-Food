@@ -2,6 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+*{
+    margin: 0;
+    padding: 0;
+}
 
 :root {
     --cor0: #940707;
@@ -12,13 +16,12 @@
 }
 
 
-body {}
 
 
 header {
     background-image: linear-gradient(to bottom, var(--cor3), #c22a2a);
     background-repeat: no-repeat;
-    width: 100vw;
+    width: 100%;
     height: 300px;
     color: white;
     text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
@@ -200,7 +203,7 @@ footer {
 
 
     header>img {
-        top: 18%;
+        top: 150px;
         width: 250px;
     }
 
@@ -215,9 +218,7 @@ footer {
 }
 
 @media screen and (max-width:576px) {
-    body {
-        overflow-x: hidden !important;
-      }
+   
 
       header>div>button {
         top: 180px;
@@ -226,9 +227,8 @@ footer {
       
 
     header>img {
-        top: 19%;
-        width: 250px;
-        object-fit: contain;
+        top: 194px;
+        width: 185px;
     }
 
     nav .nome,
@@ -317,31 +317,19 @@ footer {
     }
 
 
-    @media screen and (max-width: 490px) {
+
+
+  
+    @media screen and (max-width: 425px) {
 
         header>div>button {
-            top: 179px;
-            width: 110px;
+            width: 100px;
+            top: 170px;
         }
 
         header>img {
-            top: 28%;
-            width: 185px;
-        }
-
-
-    }
-
-    @media screen and (max-width: 394px) {
-
-        header>div>button {
-
-            top: 169px;
-        }
-
-        header>img {
-            top: 26%;
-            width: 185px;
+            top: 200px;
+            width: 160px;
         }
 
         
@@ -373,5 +361,15 @@ footer {
             left: calc(50% - 150px);
         }
     }
+
+}
+
+@media screen and (max-width: 320px) {
+
+       
+    header>img {
+        display: none;
+    }
+
 
 }
