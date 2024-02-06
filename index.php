@@ -24,12 +24,13 @@
         <div class="sombra" id="container-a">
                 
             <div id="login">
+                <form action="login.php" method="post">
                 <img id="EtecImg" src="imagens/etec-logon.jpg" alt="Logon da ETEC - Escola Técnica Estadual">
-                <input type="number" class="form-control" id="#" placeholder="Digite seu NSA:">
-                <input type="email" class="form-control" id="#" placeholder="Digite seu Email:">
-                <input type="password" class="form-control" id="#" placeholder="Digite sua senha:">
-                <button type="button" class="form-control"><a style="color: white;" href="tela.inicial.html">ENTRAR</a></button>
-                <a href=""></a>
+                <input type="number" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA:">
+                <input type="email" class="form-control" id="username" name="username"  placeholder="Digite seu Email:">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha:">
+                <button type="submit" class="form-control" style="color: white;">ENTRAR</button>
+                <a href=""></a></form>
                 
 
                 <p style="position: absolute; top: 602px;" id="criarConta">Não possui conta? <a style="color: red;" href="#">Clique aqui</a> </p>
