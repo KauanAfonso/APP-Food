@@ -16,7 +16,7 @@
 <body>
 
     <header>
-        <h1>BEM-VINDO</h1>
+        <h1>Alterar Senha:</h1>
     </header>
 
 
@@ -26,12 +26,13 @@
         <div class="sombra" id="container-a">
                 
             <div id="login">
-                <form action="login.php" method="post">
+                <form action="" method="post">
                 <img id="EtecImg" src="imagens/etec-logon.jpg" alt="Logon da ETEC - Escola Técnica Estadual">
-                <input type="text" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA ou adm:">
                 <input type="text" class="form-control" id="username" name="username"  placeholder="Digite seu Email:">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha:">
-                <button type="submit" class="form-control" style="color: white;">ENTRAR</button>
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Digite sua nova senha:">
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Digite sua nova senha novamente:">
+                <button type="submit" class="form-control" style="color: white;">Alterar senha:</button>
+                
                 <a href=""></a></form>
                 
                 <?php
@@ -41,23 +42,21 @@
 
                     if($_SERVER['REQUEST_METHOD'] === 'POST'){
                         $username = $_POST['username'];
-                        $nsa = $_POST['nsa'];
-                        $password = $_POST['password'];
+                        $password1 = $_POST['password1'];
+                        $password2 = $_POST['password2'];
 
                         //esse arquivo não foi configurado com elementos de segurança;
                         //é vunerável a ataques de injeção de sql;
-                        $query = "SELECT * FROM usuariosetec WHERE username = '$username' AND password = '$password' AND nsa = '$nsa' ";
+                        $query = "SELECT * FROM usuariosetec WHERE username = '$username' ";
                         $result = $conn ->query($query);
 
-                        if($result-> num_rows === 1  && $username === "admin"){ //o adm entra como adimin no nsa;
-                            header("Location: adiministrador.php");
-                        }
-                        else if($result ->num_rows === 1){
-                            $_SESSION['username'] = $username;
-                            header("Location: tela.inicial.php");
+                        if($result-> num_rows === 1  && $password1 == $password2){ 
+                            $queryAlterarSenha = "UPDATE `usuariosetec` SET `password` = '$password2' WHERE `username` = '$username'";
+                            $uptade = $conn->query($queryAlterarSenha);
+                            echo "Senha atualizada com sucesso!";
+                            echo "<a href='./login.php'>Login</a>";
                         }
                         else{
-                            
                             echo "Usuario ou senha inválidos.";
                             echo "<a href='./changePassword.php'>Esqueci a senha</a>";
                         }

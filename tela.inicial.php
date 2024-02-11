@@ -7,18 +7,42 @@ if(!isset($_SESSION['username'])){
     exit();
 }
 
-
-
 require_once('db.php');
 
 $usuario = "SELECT nome FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
 $result = $conn->query($usuario);
 
-
-
 $elemento = $result->fetch_assoc(); //transformar a consulta do banco em um valor em array;
 $nome = $elemento['nome']; //acessando o valor
 $nomeMaiusculo = strtoupper($nome);
+
+//selecionando todos os produtos 
+$queryProdutos = "SELECT * from produtos;";
+$produtosFinais = $conn->query($queryProdutos);
+
+
+//consultas para selecionar produtos por categoria:
+
+//categoria = 'Lanches';
+$queryProdutosLanches = "SELECT * FROM produtos WHERE categoria = 'Lanches'";
+$queryProdutosLanchesFinais = $conn->query($queryProdutosLanches);
+// print_r($queryProdutosLanchesFinais);
+
+//categoria = 'Pasteis'
+$queryProdutosPasteis = "SELECT * FROM produtos WHERE categoria = 'Pasteis'";
+$queryProdutosPasteisFinais = $conn->query($queryProdutosPasteis);
+// print_r($queryProdutosPasteisFinais);
+
+
+//categoria = 'Batatas'
+$queryProdutosBatatas = "SELECT * FROM produtos WHERE categoria = 'Batatas'";
+$queryProdutosBatatasFinais = $conn->query($queryProdutosBatatas);
+// print_r($queryProdutosBatatasFinais);
+
+//categoria = 'Doces'
+$queryProdutosDoces = "SELECT * FROM produtos WHERE categoria = 'Doces'";
+$queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
+// print_r($queryProdutosDocesFinais);
 
 
 ?>
@@ -66,7 +90,7 @@ $nomeMaiusculo = strtoupper($nome);
 
       <nav>
         <div class="nome">
-          <h1>SEJA BEM-VINDO<?php echo ": " . " <h1>$nomeMaiusculo</h1>" ?></h1>
+          <h1>SEJA BEM-VINDO<?php echo ": " . " <h1>$nomeMaiusculo</h1>"  ?></h1>
         </div>
 
         <button id="mn-hamburguer" onclick="toggleMenu()">≣</button>
@@ -133,7 +157,27 @@ $nomeMaiusculo = strtoupper($nome);
     </div>
 
 
+    <?php
 
+//se a consuta retornar mais de uma linha
+if($produtosFinais->num_rows >0){
+
+  //iterando sobre cada linha onde a consulta se tornou um array associativo e armazenando em uma variave $row, onde consigo acessar cada valor atraves de sua posição
+  while ($row =$produtosFinais->fetch_assoc()) {
+    echo "
+    <div>
+      <ul> 
+        <li><img src=\"{$row['imagem']}\"></li>
+        <li>Nome: {$row['nome']}</li>
+        <li>Descrição: {$row['descricao']}</li>
+        <li>Preço: {$row['preco']}</li>
+      </ul>
+    </div>";
+  }
+
+}
+
+?>
 
   </main>
 
