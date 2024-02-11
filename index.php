@@ -26,14 +26,14 @@
             <div id="login">
                 <form action="login.php" method="post">
                 <img id="EtecImg" src="imagens/etec-logon.jpg" alt="Logon da ETEC - Escola Técnica Estadual">
-                <input type="number" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA:">
-                <input type="email" class="form-control" id="username" name="username"  placeholder="Digite seu Email:">
+                <input type="text" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA:">
+                <input type="text" class="form-control" id="username" name="username"  placeholder="Digite seu Email:">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha:">
                 <button type="submit" class="form-control" style="color: white;">ENTRAR</button>
                 <a href=""></a></form>
                 
 
-                <p style="position: absolute; top: 602px;" id="criarConta">Não possui conta? <a style="color: red;" href="#">Clique aqui</a> </p>
+                <p style="position: absolute; top: 602px;" id="criarConta">Não possui conta? <a style="color: red;" href="./criarConta.php">Clique aqui</a> </p>
             </div>
                 
                 
@@ -43,7 +43,7 @@
 
         <div class="sombra" id="container-b">
             <img src="imagens/etec-logon.jpg" alt="Logon da ETEC - Escola Técnica Estadual">
-            <p id="cadastro">Não possui conta? <a style="color: red;" href="#">Clique aqui</a> </p>
+            <p id="cadastro">Não possui conta? <a style="color: red;" href="./criarConta.php">Clique aqui</a> </p>
 
         </div>
         </div>

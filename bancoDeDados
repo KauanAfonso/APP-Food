@@ -1,0 +1,18 @@
+CREATE DATABASE app_food;
+
+CREATE TABLE usuariosetec( id int PRIMARY KEY AUTO_INCREMENT, tipo varchar(255), nsa varchar(255), nome varchar(255), username varchar(255), password varchar(255) );
+
+INSERT INTO usuariosetec (tipo, nsa, nome, username, password) VALUES
+('administrador', NULL, 'Admin', 'admin', 'senha123'),
+('aluno', '23006', 'Kauan', 'kauanafon3@gmail.com', 'senha1'),
+('aluno', '58002', 'Rodrigo', 'rodrigo@1', 'senha2');
+
+
+CREATE TABLE produtos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255),
+    categoria VARCHAR(255),
+    descricao VARCHAR(255),
+    preco FLOAT,
+    imagem VARCHAR(255) -- Coluna para armazenar o caminho da imagem
+);

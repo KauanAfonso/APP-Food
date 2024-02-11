@@ -7,8 +7,20 @@ if(!isset($_SESSION['username'])){
     exit();
 }
 
-echo "bem vindo , " . $_SESSION['username'] . "!<br>";
-echo "<a href='logout.php'>Sair</a>";
+
+
+require_once('db.php');
+
+$usuario = "SELECT nome FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
+$result = $conn->query($usuario);
+
+
+
+$elemento = $result->fetch_assoc(); //transformar a consulta do banco em um valor em array;
+$nome = $elemento['nome']; //acessando o valor
+$nomeMaiusculo = strtoupper($nome);
+
+
 ?>
 
 
@@ -35,7 +47,7 @@ echo "<a href='logout.php'>Sair</a>";
   <div id="conteudoMenuMobile">
 
     <nav>
-      <h5>SEJA BEM-VINDO (NOME)</h5>
+      <h5>SEJA BEM-VINDO <?php echo " " .  $nome . "!" ?>;</h5>
 
       <p id="fecharMenu" style="font-size: 1rem; cursor: pointer;" onclick="toggleMenu()">X</p>
     </nav>
@@ -54,7 +66,7 @@ echo "<a href='logout.php'>Sair</a>";
 
       <nav>
         <div class="nome">
-          <h1>SEJA BEM-VINDO (NOME)</h1>
+          <h1>SEJA BEM-VINDO<?php echo ": " . " <h1>$nomeMaiusculo</h1>" ?></h1>
         </div>
 
         <button id="mn-hamburguer" onclick="toggleMenu()">≣</button>
@@ -63,7 +75,7 @@ echo "<a href='logout.php'>Sair</a>";
         <div class="navegacao">
           <a href="#">SOBRE</a>
           <a href="#">LOGIN</a>
-          <a href="#">SAIR</a>
+          <a href="logout.php">SAIR</a>
 
 
           <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
