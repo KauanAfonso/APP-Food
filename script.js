@@ -6,14 +6,14 @@ function toggleMenu() {
       menu.style.display = 'none';
     }
   }
+
+ 
+  var imagem1 = document.getElementById('img1')
+  var imagem2 = document.getElementById('img2')
+  var imagem3 = document.getElementById('img3')
+  var imagem4 = document.getElementById('img4')
+  var imagem5 = document.getElementById('img5')
   
-
-  const imagem1 = document.getElementById('img1')
-  const imagem2 = document.getElementById('img2')
-  const imagem3 = document.getElementById('img3')
-  const imagem4 = document.getElementById('img4')
-  const imagem5 = document.getElementById('img5')
-
 
   imagem1.addEventListener('click' , function(){
  
@@ -68,5 +68,8 @@ function toggleMenu() {
     imagem3.style.opacity = '1'
     imagem4.style.opacity = '1'
     imagem5.style.opacity = '0.3'
+
+    
+
 
   })

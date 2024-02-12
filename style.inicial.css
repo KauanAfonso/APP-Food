@@ -153,8 +153,8 @@ main h1{
 }
 
 .img2 {
-    top: 180px;
-    width: 140px;
+    top: 165px;
+    
     position: absolute;
     left: calc(50% - 275px);
 }
@@ -166,6 +166,11 @@ main h1{
 
     left: calc(50% - 70px);
 }
+
+#img4{
+    width: 154px;
+}
+
 
 footer {
     background-image: linear-gradient(to top, var(--cor0), #c22a2a);
