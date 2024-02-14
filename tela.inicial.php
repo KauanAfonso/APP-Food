@@ -63,6 +63,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&family=Rubik+Moonrocks&display=swap" rel="stylesheet">
 <script src="script.js" defer></script>
+<script src='carrinho.js'></script>
 </head>
 
 
@@ -114,7 +115,11 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            GFDGFDGFDGDFG
+          <ul id="produtosNoCarrinho"></ul>
+
+          <textarea id="mensagem" rows="5" cols="28" placeholder='Tirar cebola...'></textarea>
+          <h5 id='totalCompra'>Total: </h5>
+          <button type="button" class="btn btn-success">Finalizar Compra</button>
           </div>
         </div>
 
@@ -160,42 +165,39 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
 
 <?php
 
-//se a consuta retornar mais de uma linha
-if($produtosFinais->num_rows >0){
+// Se a consulta retornar mais de uma linha
+if ($produtosFinais->num_rows > 0) {
 
-  //iterando sobre cada linha onde a consulta se tornou um array associativo e armazenando em uma variave $row, onde consigo acessar cada valor atraves de sua posição
-  
+  // Iterando sobre cada linha onde a consulta se tornou um array associativo e armazenando em uma variável $row, onde consigo acessar cada valor através de sua posição
   while ($row = $produtosFinais->fetch_assoc()) {
-      echo "
-     
-      <div class='container text-center' style='display: none;'>
+    echo "
+    <div class='container text-center' style='display: none;'>
       <div class='row'>
-        <div class='col-md-12'>
-        <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
-        <div class=\"row g-0\">
-            <div class=\"col-md-4\">
+        <div class='col-md-12' id='produto{$row['id']}'>
+          <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
+            <div class=\"row g-0\">
+              <div class=\"col-md-4\">
                 <img src=\"{$row['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
-            </div>
-            <div class=\"col-md-8\">
+              </div>
+              <div class=\"col-md-8\">
                 <div class=\"card-body\">
-                    <h5 class=\"card-title\">{$row['nome']}</h5>
-                    <p class=\"card-text\">{$row['descricao']}</p>
-                    <p class=\"card-text\"><small class=\"text-body-secondary\">Preço: R$ {$row['preco']}</small></p>
-                    <button type='button' class='btn btn-danger'>Adicioinar ao carrinho</button>
+                  <h5 class=\"card-title\">{$row['nome']}</h5>
+                  <p class=\"card-text\">{$row['descricao']}</p>
+                  <p class=\"card-subtitle\"><small class=\"text-body-secondary\">{$row['preco']}</small></p>
+                  <button type='button' class='btn btn-danger' data-id-produto='{$row['id']}'>Adicionar ao carrinho</button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-        </div>
-      
       </div>
     </div>
 ";
 
-      
   }
 }  
 ?>
+
 
   
 </p>
@@ -205,23 +207,23 @@ if($produtosFinais->num_rows >0){
 
 if($queryProdutosLanchesFinais->num_rows > 0){
 
-while($row2 = $queryProdutosLanchesFinais->fetch_assoc()){
+while($row = $queryProdutosLanchesFinais->fetch_assoc()){
   echo "
      
   <div class='container2 text-center' style='display: none;'>
   <div class='row'>
-    <div class='col-md-12'>
+    <div class='col-md-12'id='produto{$row['id']}'>
     <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
     <div class=\"row g-0\">
         <div class=\"col-md-4\">
-            <img src=\"{$row2['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
+            <img src=\"{$row['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
         </div>
         <div class=\"col-md-8\">
             <div class=\"card-body\">
-                <h5 class=\"card-title\">{$row2['nome']}</h5>
-                <p class=\"card-text\">{$row2['descricao']}</p>
-                <p class=\"card-text\"><small class=\"text-body-secondary\">Preço: R$ {$row2['preco']}</small></p>
-                <button type='button' class='btn btn-danger'>Adicioinar ao carrinho</button>
+                <h5 class=\"card-title\">{$row['nome']}</h5>
+                <p class=\"card-text\">{$row['descricao']}</p>
+                <p class=\"card-subtitle\"><small class=\"text-body-secondary\">{$row['preco']}</small></p>
+                 <button type='button' class='btn btn-danger' data-id-produto='{$row['id']}'>Adicionar ao carrinho</button>
             </div>
         </div>
     </div>
@@ -243,23 +245,23 @@ while($row2 = $queryProdutosLanchesFinais->fetch_assoc()){
 
 if($queryProdutosPasteisFinais->num_rows > 0){
 
-while($row3 = $queryProdutosPasteisFinais->fetch_assoc()){
+while($row = $queryProdutosPasteisFinais->fetch_assoc()){
   echo "
      
   <div class='container3 text-center' style='display: none;'>
   <div class='row'>
-    <div class='col-md-12'>
+    <div class='col-md-12' id='produto{$row['id']}'>
     <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
     <div class=\"row g-0\">
         <div class=\"col-md-4\">
-            <img src=\"{$row3['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
+            <img src=\"{$row['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
         </div>
         <div class=\"col-md-8\">
             <div class=\"card-body\">
-                <h5 class=\"card-title\">{$row3['nome']}</h5>
-                <p class=\"card-text\">{$row3['descricao']}</p>
-                <p class=\"card-text\"><small class=\"text-body-secondary\">Preço: R$ {$row3['preco']}</small></p>
-                <button type='button' class='btn btn-danger'>Adicioinar ao carrinho</button>
+                <h5 class=\"card-title\">{$row['nome']}</h5>
+                <p class=\"card-text\">{$row['descricao']}</p>
+                <p class=\"card-subtitle\"><small class=\"text-body-secondary\">Preço: R$ {$row['preco']}</small></p>
+                 <button type='button' class='btn btn-danger' data-id-produto='{$row['id']}'>Adicionar ao carrinho</button>
             </div>
         </div>
     </div>
@@ -281,23 +283,23 @@ while($row3 = $queryProdutosPasteisFinais->fetch_assoc()){
 
 if($queryProdutosBatatasFinais->num_rows > 0){
 
-while($rows4 = $queryProdutosBatatasFinais->fetch_assoc()){
+while($row = $queryProdutosBatatasFinais->fetch_assoc()){
   echo "
      
   <div class='container4 text-center' style='display: none;'>
   <div class='row'>
-    <div class='col-md-12'>
+    <div class='col-md-12' id='produto{$row['id']}'>
     <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
     <div class=\"row g-0\">
         <div class=\"col-md-4\">
-            <img src=\"{$rows4['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
+            <img src=\"{$row['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
         </div>
         <div class=\"col-md-8\">
             <div class=\"card-body\">
-                <h5 class=\"card-title\">{$rows4['nome']}</h5>
-                <p class=\"card-text\">{$rows4['descricao']}</p>
-                <p class=\"card-text\"><small class=\"text-body-secondary\">Preço: R$ {$rows4['preco']}</small></p>
-                <button type='button' class='btn btn-danger'>Adicioinar ao carrinho</button>
+                <h5 class=\"card-title\">{$row['nome']}</h5>
+                <p class=\"card-text\">{$row['descricao']}</p>
+                <p class=\"card-subtitle\"><small class=\"text-body-secondary\">Preço: R$ {$row['preco']}</small></p>
+                 <button type='button' class='btn btn-danger' data-id-produto='{$row['id']}'>Adicionar ao carrinho</button>
             </div>
         </div>
     </div>
@@ -320,23 +322,23 @@ while($rows4 = $queryProdutosBatatasFinais->fetch_assoc()){
 
 if($queryProdutosDocesFinais->num_rows >0){
 
-  while($row5 = $queryProdutosDocesFinais->fetch_assoc()){
+  while($row = $queryProdutosDocesFinais->fetch_assoc()){
     echo  "
      
     <div class='container5 text-center' style='display: none;'>
     <div class='row'>
-      <div class='col-md-12'>
+      <div class='col-md-12' id='produto{$row['id']}'>
       <div class=\"card mb-3\" style=\"max-width:700px; height:180px;\">
       <div class=\"row g-0\">
           <div class=\"col-md-4\">
-              <img src=\"{$row5['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
+              <img src=\"{$row['imagem']}\" class=\"img-fluid rounded-start\" alt=\"Product Image\">
           </div>
           <div class=\"col-md-8\">
               <div class=\"card-body\">
-                  <h5 class=\"card-title\">{$row5['nome']}</h5>
-                  <p class=\"card-text\">{$row5['descricao']}</p>
-                  <p class=\"card-text\"><small class=\"text-body-secondary\">Preço: R$ {$row5['preco']}</small></p>
-                  <button type='button' class='btn btn-danger'>Adicioinar ao carrinho</button>
+                  <h5 class=\"card-title\">{$row['nome']}</h5>
+                  <p class=\"card-text\">{$row['descricao']}</p>
+                  <p class=\"card-subtitle\"><small class=\"text-body-secondary\" >Preço: R$ {$row['preco']}</small></p>
+                  <button type='button' class='btn btn-danger' data-id-produto='{$row['id']}'>Adicionar ao carrinho</button>
               </div>
           </div>
       </div>
@@ -493,8 +495,80 @@ document.getElementById('img4').addEventListener('click' , function(){
 )
 
 
+</script>
+
+<script>
+  const btnCarrinho = document.querySelectorAll('.btn.btn-danger');
+  const carrinho = document.getElementById('produtosNoCarrinho');
+  var totalDoCarrinho = document.getElementById("totalCompra");
+  let contador = 0;
+
+  function removerProduto(teste){
+    document.querySelector('#produtosNoCarrinho li').remove();
+    totalDoCarrinho.textContent -= teste;
+  }
+
+  btnCarrinho.forEach(element => {
+      element.addEventListener('click', function(){
+        // Obtenha o ID do produto a partir do botão clicado
+        var idDoProduto = element.getAttribute('data-id-produto');
+        // Use o ID do produto para acessar o elemento correspondente
+        var produtosDaLoja = document.getElementById("produto" + idDoProduto);
+        
+        const nomeDoProduto = produtosDaLoja.querySelector('.card-title').textContent;
+        const imgDoProduto = produtosDaLoja.querySelector('.col-md-4 img').getAttribute('src');
+        var precoDoProduto = parseFloat(produtosDaLoja.querySelector('.card-subtitle').textContent);
+        const descricao = produtosDaLoja.querySelector('.card-text').textContent;
+
+
+carrinho.innerHTML += `
+        <li>
+          <div class="card mb-3" style="max-width: 400px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${imgDoProduto}" class="img-fluid rounded-start" alt="Product Image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">${nomeDoProduto}</h5>
+                  <p class="card-text">${descricao}</p>
+                  <p class="card-text"><small class="text-muted">${precoDoProduto}</small></p>
+                  <p class="card-text"><button type="button" class="btn btn-danger" onclick="removerProduto(teste)">Remover</button></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>`;
+
+
+alert("Produto adicionado no carrinho: " + nomeDoProduto);
+
+
+contador+= precoDoProduto
+console.log(contador)
+
+
+totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+  
+
+
+
+ 
+      });
+
+      
+  });
+
+  removerProduto(contador)
+
+
+  
+
+ 
 
 </script>
+
+
 
 </html>
 
