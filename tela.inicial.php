@@ -520,7 +520,7 @@ document.getElementById('img4').addEventListener('click' , function(){
 
 carrinho.innerHTML += `
         <li>
-          <div class="card mb-3" style="max-width: 400px;">
+          <div class="card mb-3" style="max-width: 400px;" >
             <div class="row g-0">
               <div class="col-md-4">
                 <img src="${imgDoProduto}" class="img-fluid rounded-start" alt="Product Image">
@@ -576,15 +576,13 @@ totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumF
     // Atualize o total do carrinho exibindo-o novamente na página
     totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
-    console.log(contador)
-    console.log(precoMod.toFixed(2))
 }
 
 
   btnComprar = document.querySelectorAll('li .btn.btn-danger').forEach(removerProduto)
 
 
-  
+  console.log(produtosNoCarrinho)
 
  
 
