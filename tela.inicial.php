@@ -498,15 +498,12 @@ document.getElementById('img4').addEventListener('click' , function(){
 </script>
 
 <script>
-  const btnCarrinho = document.querySelectorAll('.btn.btn-danger');
-  const carrinho = document.getElementById('produtosNoCarrinho');
+  var btnCarrinho = document.querySelectorAll('.btn.btn-danger');
+  var carrinho = document.getElementById('produtosNoCarrinho');
   var totalDoCarrinho = document.getElementById("totalCompra");
-  let contador = 0;
+  var contador = 0;
 
-  function removerProduto(teste){
-    document.querySelector('#produtosNoCarrinho li').remove();
-    totalDoCarrinho.textContent -= teste;
-  }
+ 
 
   btnCarrinho.forEach(element => {
       element.addEventListener('click', function(){
@@ -515,10 +512,10 @@ document.getElementById('img4').addEventListener('click' , function(){
         // Use o ID do produto para acessar o elemento correspondente
         var produtosDaLoja = document.getElementById("produto" + idDoProduto);
         
-        const nomeDoProduto = produtosDaLoja.querySelector('.card-title').textContent;
-        const imgDoProduto = produtosDaLoja.querySelector('.col-md-4 img').getAttribute('src');
+        var nomeDoProduto = produtosDaLoja.querySelector('.card-title').textContent;
+        var imgDoProduto = produtosDaLoja.querySelector('.col-md-4 img').getAttribute('src');
         var precoDoProduto = parseFloat(produtosDaLoja.querySelector('.card-subtitle').textContent);
-        const descricao = produtosDaLoja.querySelector('.card-text').textContent;
+        var descricao = produtosDaLoja.querySelector('.card-text').textContent;
 
 
 carrinho.innerHTML += `
@@ -532,8 +529,8 @@ carrinho.innerHTML += `
                 <div class="card-body">
                   <h5 class="card-title">${nomeDoProduto}</h5>
                   <p class="card-text">${descricao}</p>
-                  <p class="card-text"><small class="text-muted">${precoDoProduto}</small></p>
-                  <p class="card-text"><button type="button" class="btn btn-danger" onclick="removerProduto(teste)">Remover</button></p>
+                  <p class="card-subtitle"><small class="text-muted">${precoDoProduto}</small></p>
+                  <p class="card-text"><button type="button" class="btn btn-danger" onclick="removerProduto()">Remover</button></p>
                 </div>
               </div>
             </div>
@@ -559,7 +556,32 @@ totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumF
       
   });
 
-  removerProduto(contador)
+  function removerProduto(){
+    var produtosNoCarrinho = document.querySelectorAll('#produtosNoCarrinho li');
+
+    // Verifique se há itens no carrinho antes de prosseguir
+    if (produtosNoCarrinho.length === 0) {
+        alert('Carrinho vazio!');
+        return;
+    }
+
+    // Encontre o último item no carrinho e remova-o
+    var ultimoItem = produtosNoCarrinho[produtosNoCarrinho.length - 1];
+    var precoDoUltimoItem = parseFloat(ultimoItem.querySelector('.card-subtitle').textContent);
+
+    // Atualize o total e remova o item do DOM
+    contador -= precoDoUltimoItem;
+    ultimoItem.remove();
+
+    // Atualize o total do carrinho exibindo-o novamente na página
+    totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+    console.log(contador)
+    console.log(precoMod.toFixed(2))
+}
+
+
+  btnComprar = document.querySelectorAll('li .btn.btn-danger').forEach(removerProduto)
 
 
   
