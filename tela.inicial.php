@@ -120,20 +120,29 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-            <ul id="produtosNoCarrinho"></ul>
+          <form action="tela.inicial.php" method="POST" id="formCarrinho">
+  <ul id="produtosNoCarrinho"></ul>
 
-            <textarea id="mensagem" rows="5" cols="28" placeholder='Tirar cebola...'></textarea>
-            <h5 id='totalCompra'>Total: </h5>
-            <button type="button" class="btn btn-success">Finalizar Compra</button>
-          </div>
+  <!-- Campos ocultos para armazenar informações dos produtos -->
+  <input type="hidden" name="produto_id[]" id="produto_id" value="">
+  <input type="hidden" name="produto_nome[]" id="produto_nome" value="">
+  <!-- Adicione outros campos ocultos conforme necessário -->
+
+  <textarea id="mensagem" name="mensagem" rows="5" cols="28" placeholder="Tirar cebola..."></textarea>
+  <h5 id="totalCompra">Total: </h5>
+  <button type="submit" class="btn btn-success">Finalizar Compra</button>
+</form>
+
         </div>
+
+
 
 
 
       </nav>
     </div>
 
-
+  
 
 
     <div class="btn-comprar">
@@ -514,6 +523,7 @@ if($queryProdutosDocesFinais->num_rows >0){
     element.addEventListener('click', function () {
       // Obtenha o ID do produto a partir do botão clicado
       var idDoProduto = element.getAttribute('data-id-produto');
+      
       // Use o ID do produto para acessar o elemento correspondente
       var produtosDaLoja = document.getElementById("produto" + idDoProduto);
 
@@ -525,7 +535,7 @@ if($queryProdutosDocesFinais->num_rows >0){
 
       carrinho.innerHTML += `
         <li>
-          <div class="card mb-3" style="max-width: 400px;" >
+          <div class="card mb-3" style="max-width: 400px;" id='Produto ${idDoProduto}' name='Produto ${idDoProduto}' >
             <div class="row g-0">
               <div class="col-md-4">
                 <img src="${imgDoProduto}" class="img-fluid rounded-start" alt="Product Image">
@@ -592,6 +602,8 @@ if($queryProdutosDocesFinais->num_rows >0){
 
 
 </script>
+
+
 
 
 

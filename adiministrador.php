@@ -21,7 +21,9 @@ session_start();
 
 <h1>Administrador</h1> 
 
-<a href="editarProdutos.php">Editar produtos</a>
+<a href="CriarProdutos.php">Criar produtos</a>
+<a href="ExcluirProduto.php">Excluir produtos</a>
+<a href="">Editar Produtos </a>
 <a href="">Conferir pedidos</a>
 <a href="">Mensagens</a>
 
