@@ -41,6 +41,7 @@ id int PRIMARY KEY AUTO_INCREMENT,
 IdProdutos int,
 IdUsuarios int,
 dataDaCompra date,
+precoTotal float,
     
 
 FOREIGN KEY (IdProdutos) REFERENCES produtos(id),
