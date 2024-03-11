@@ -5,12 +5,12 @@ $user = 'root';
 $pass = '';
 $db = 'app_food';
 // $port = 3307;
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = mysqli_connect($host, $user, $pass, $db);
 
-if($conn ->connect_error){
+if ($conn->connect_error) {
     die("Erro na conexão: " . $conn->connect_error);
 }
 
-
+// Restante do código...
 
 ?>

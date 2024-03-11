@@ -2,19 +2,23 @@
 
 session_start();
 
-if(!isset($_SESSION['username'])){
-    header("Location: index.php");
-    exit();
-}
 
 require_once('db.php');
+
+
+
+
 
 $usuario = "SELECT nome FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
 $result = $conn->query($usuario);
 
+
 $elemento = $result->fetch_assoc(); //transformar a consulta do banco em um valor em array;
 $nome = $elemento['nome']; //acessando o valor
 $nomeMaiusculo = strtoupper($nome);
+
+
+
 
 //selecionando todos os produtos 
 $queryProdutos = "SELECT * from produtos;";
@@ -63,6 +67,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&family=Rubik+Moonrocks&display=swap"
     rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="script.js" defer></script>
   <script src='carrinho.js'></script>
 </head>
@@ -120,8 +125,9 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div class="offcanvas-body">
-          <form action="tela.inicial.php" method="POST" id="formCarrinho">
-  <ul id="produtosNoCarrinho"></ul>
+
+          <form action="carrinho.php" method="POST" id="formCarrinho" name='formCarrinho'>
+  <ul id="produtosNoCarrinho" name='teste'></ul>
 
   <!-- Campos ocultos para armazenar informações dos produtos -->
   <input type="hidden" name="produto_id[]" id="produto_id" value="">
@@ -129,14 +135,19 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
   <!-- Adicione outros campos ocultos conforme necessário -->
 
   <textarea id="mensagem" name="mensagem" rows="5" cols="28" placeholder="Tirar cebola..."></textarea>
-  <h5 id="totalCompra">Total: </h5>
-  <button type="submit" class="btn btn-success">Finalizar Compra</button>
+  <h5 id="totalCompra" name="totalCompra"></h5>
+  <input type="hidden" name="totalCompras" id="totalCompraInput" value="">
+  <button type="submit" class="btn btn-success" onclick="preencherCamposEEnviar()" id='finalizarCompra'>Finalizar Compra</button>
 </form>
+
+
+
+
 
         </div>
 
 
-
+      
 
 
       </nav>
@@ -535,7 +546,7 @@ if($queryProdutosDocesFinais->num_rows >0){
 
       carrinho.innerHTML += `
         <li>
-          <div class="card mb-3" style="max-width: 400px;" id='Produto ${idDoProduto}' name='Produto ${idDoProduto}' >
+          <div class="card mb-3" style="max-width: 400px;" id='Produto ${idDoProduto}' name='${idDoProduto}' >
             <div class="row g-0">
               <div class="col-md-4">
                 <img src="${imgDoProduto}" class="img-fluid rounded-start" alt="Product Image">
@@ -545,7 +556,7 @@ if($queryProdutosDocesFinais->num_rows >0){
                   <h5 class="card-title">${nomeDoProduto}</h5>
                   <p class="card-text">${descricao}</p>
                   <p class="card-subtitle"><small class="text-muted">${precoDoProduto}</small></p>
-                  <p class="card-text"><button type="button" class="btn btn-danger" onclick="removerProduto()">Remover</button></p>
+                  <p class="card-text"><button type="button" class="btn btn-danger" data-id-produtos='${idDoProduto}' onclick="removerProduto()">Remover</button></p>
                 </div>
               </div>
             </div>
@@ -563,13 +574,33 @@ if($queryProdutosDocesFinais->num_rows >0){
       totalDoCarrinho.textContent = "R$" + contador.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
 
-
-
-
+    
     });
 
 
   });
+  function preencherCamposEEnviar() {
+    var produtoIds = [];
+    var produtoNomes = [];
+    var valorTotalEmInput= document.getElementById("totalCompraInput").value;
+    valorTotalEmInput+= contador;
+
+    $('#produtosNoCarrinho li').each(function() {
+        var idDoProduto = $(this).find('.btn-danger').data('idProdutos');
+        var nomeDoProduto = $(this).find('.card-title').text();
+
+        produtoIds.push(idDoProduto);
+        produtoNomes.push(nomeDoProduto);
+    });
+
+    $('#produto_id').val(produtoIds.join(','));
+    $('#produto_nome').val(produtoNomes.join(','));
+    $('#totalCompraInput').val(valorTotalEmInput); // Corrigir para corresponder ao nome do campo no HTML
+
+    $('#formCarrinho').submit();
+    window.location.href = 'tela.inicial.php';
+}
+
 
   function removerProduto() {
     var produtosNoCarrinho = document.querySelectorAll('#produtosNoCarrinho li');

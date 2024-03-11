@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,14 +26,47 @@
         <div class="sombra" id="container-a">
                 
             <div id="login">
-                <form action="login.php" method="post">
+                <form action="index.php" method="post">
                 <img id="EtecImg" src="imagens/etec-logon.jpg" alt="Logon da ETEC - Escola Técnica Estadual">
-                <input type="text" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA:">
+                <input type="text" class="form-control" id="nsa" name="nsa" placeholder="Digite seu NSA ou adm:">
                 <input type="text" class="form-control" id="username" name="username"  placeholder="Digite seu Email:">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha:">
                 <button type="submit" class="form-control" style="color: white;">ENTRAR</button>
                 <a href=""></a></form>
                 
+                <?php
+
+                    session_start();
+                    require_once('db.php');
+
+
+                    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                        $username = $_POST['username'];
+                        $nsa = $_POST['nsa'];
+                        $password = $_POST['password'];
+
+                        //esse arquivo não foi configurado com elementos de segurança;
+                        //é vunerável a ataques de injeção de sql;
+                        $query = "SELECT * FROM usuariosetec WHERE username = '$username' AND password = '$password' AND nsa = '$nsa' ";
+                        $result = $conn ->query($query);
+
+                        if($result-> num_rows === 1  && $username === "admin"){ //o adm entra como adimin no nsa;
+                            header("Location: adiministrador.php");
+                        }
+                        else if($result ->num_rows === 1){
+                            $_SESSION['username'] = $username;
+                            header("Location: tela.inicial.php");
+                        }
+                        else{
+                            
+                            echo "Usuario ou senha inválidos.";
+                            echo "<a href='./changePassword.php'>Esqueci a senha</a>";
+                        }
+                    }
+
+                    ?>
+
+
 
                 <p style="position: absolute; top: 602px;" id="criarConta">Não possui conta? <a style="color: red;" href="./criarConta.php">Clique aqui</a> </p>
             </div>

@@ -36,14 +36,20 @@ INSERT INTO produtos (nome, categoria, descricao, preco, imagem) VALUES
     ('Cachorro-Quente', 'Lanches', 'Pão com salsicha, molho de tomate, maionese, ketchup e mostarda', 11.99, 'https://www.mmo.co.mz/wp-content/uploads/2016/07/Cachorro-Quente.jpg');
 
 
-CREATE TABLE vendas(
-id int PRIMARY KEY AUTO_INCREMENT,
-IdProdutos int,
-IdUsuarios int,
-dataDaCompra date,
-    
+CREATE TABLE pedidos (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    IdUsuarios int,
+    dataDaCompra date,
+    valorTotalDoPedido float,
+    FOREIGN KEY (IdUsuarios) REFERENCES usuariosetec(id)
+);
 
-FOREIGN KEY (IdProdutos) REFERENCES produtos(id),
-FOREIGN KEY (IdUsuarios) REFERENCES usuariosetec(id)
-    
+CREATE TABLE detalhePedidoEVenda (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    mensagemDoPedido varchar(200),
+    idPedido int,
+    IdProdutos int,
+    valorTotal float,
+    FOREIGN KEY (idPedido) REFERENCES pedidos(id),
+    FOREIGN KEY (IdProdutos) REFERENCES produtos(id)
 );
