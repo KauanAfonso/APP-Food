@@ -18,7 +18,7 @@ require_once('db.php');
 <a href="CriarProdutos.php">Criar produtos</a>
 <a href="ExcluirProduto.php">Excluir produtos</a>
 <a href="">Editar Produtos</a>
-<a href="carrinho.php">Conferir pedidos</a>
+<a href="pedidos.php">Conferir pedidos</a>
 <a href="">Mensagens</a>
 
 </body>

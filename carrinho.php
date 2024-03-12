@@ -1,7 +1,11 @@
 <?php
 session_start();
-require_once('db.php')
+require_once('db.php');
+
+header('Location: tela.inicial.php');
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,69 +18,59 @@ require_once('db.php')
     <a href="tela.inicial.php">link</a>
 
     <?php
+
     // Verificar se os dados do formulário foram recebidos corretamente
-    if (isset($_POST['produto_id']) && isset($_POST['produto_nome']) && isset($_POST['totalCompras'])) {
-        // Obtenha os valores dos campos ocultos diretamente
-        $produtoIds = is_array($_POST['produto_id']) ? $_POST['produto_id'] : [];
-        $produtoNomes = is_array($_POST['produto_nome']) ? $_POST['produto_nome'] : [];
-        $totalCompra = $_POST['totalCompras'];
-        $mensagem = isset($_POST['mensagem']) ? $_POST['mensagem'] : '';
+if (isset($_POST['produto_id']) && isset($_POST['produto_nome']) && isset($_POST['totalCompras'])) {
+    // Obtenha os valores dos campos ocultos diretamente
+    $produtoIds = is_array($_POST['produto_id']) ? $_POST['produto_id'] : [];
+    $produtoNomes = is_array($_POST['produto_nome']) ? $_POST['produto_nome'] : [];
+    $totalCompra = $_POST['totalCompras'];
+    $mensagem = isset($_POST['mensagem']) ? $_POST['mensagem'] : '';
 
-        // Inicialize o array do carrinho se não existir
-        if (!isset($_SESSION['carrinho_produtos'])) {
-            $_SESSION['carrinho_produtos'] = [];
-        }
-
-        // Obtenha a data e hora atual
-        $dataHoraPedido = date('Y-m-d H:i:s');
-
-        // Itere sobre os produtos e adicione-os ao array de produtos no carrinho
-        foreach ($produtoIds as $i => $idDoProduto) {
-            $nomeDoProduto = $produtoNomes[$i];
-
-            // Adicione o produto a um novo array no carrinho
-            $novoProduto = array(
-                'id' => $idDoProduto,
-                'nome' => $nomeDoProduto,
-                'data_hora_pedido' => $dataHoraPedido,
-            );
-
-            // Adicione o novo array ao carrinho
-            $_SESSION['carrinho_produtos'][] = $novoProduto;
-
-            // Fazer algo com os valores recebidos
-            // Neste exemplo, apenas imprimir os valores para cada produto
-            echo 'Mensagem: ' . $mensagem . '<br>';
-            echo 'Pedido ' . ($i + 1) . ':<br>';
-            echo 'ID=' . $idDoProduto . '<br>';
-            echo 'Nome=' . $nomeDoProduto . '<br>';
-            echo 'Data e Hora do Pedido=' . $dataHoraPedido . '<br>';
-            echo 'Total da Compra=' . $totalCompra . '<br>';
-            echo '<br>';
-        }
-
-
-        $usuarioIdQuery = "SELECT id FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
-        $result = $conn->query($usuarioIdQuery);
-        
-        if ($result && $result->num_rows > 0) {
-
-            while($row = $result->fetch_assoc()){
-   
-            echo $row['id']; //id do usuario
-
-            $idUsuario = $row['id'];
-        }
-        } else {
-            echo "Erro ao obter o ID do usuário.";
-        }
-    
-        
-        $insertUsuario = $conn->prepare("INSERT INTO idUsuarios from pedidos values ? ");
-        $insertUsuario = execute($idUsuario);
-    } else {
-        echo 'Erro: Dados não recebidos corretamente.';
+    // Inicialize o array do carrinho se não existir
+    if (!isset($_SESSION['carrinho_produtos'])) {
+        $_SESSION['carrinho_produtos'] = [];
     }
+
+    // Obtenha a data e hora atual
+    $dataHoraPedido = date('Y-m-d H:i:s');
+
+    // Obter o ID do usuário
+    $usuarioIdQuery = "SELECT id FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
+    $result = $conn->query($usuarioIdQuery);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $idUsuario = $row['id'];
+    } else {
+        echo "Erro ao obter o ID do usuário.";
+        exit; // Saia do script se não for possível obter o ID do usuário
+    }
+
+    // Inserir o pedido na tabela pedidos
+    $insertUsuario = $conn->prepare("INSERT INTO pedidos (idUsuarios, dataDaCompra, ValorTotalDoPedido) VALUES (?, ?, ?)");
+    $insertUsuario->bind_param("iss", $idUsuario, $dataHoraPedido, $totalCompra);
+    $insertUsuario->execute();
+
+    // Obter o ID do pedido inserido
+    $idPedido = $conn->insert_id;
+
+    // Itere sobre os produtos e adicione-os ao banco de dados
+    foreach ($produtoIds as $i => $idDoProduto) {
+        $nomeDoProduto = $produtoNomes[$i];
+
+        // Inserir os detalhes do pedido na tabela detalhepedidoevenda
+        $insertDetalhesPedidos = $conn->prepare("INSERT INTO detalhepedidoevenda (mensagemDoPedido, idPedido, idProdutos) VALUES (?, ?, ?)");
+        $insertDetalhesPedidos->bind_param("sii", $mensagem, $idPedido, $idDoProduto);
+        $insertDetalhesPedidos->execute();
+    }
+
+    echo 'Pedido(s) adicionado(s) com sucesso!';
+} else {
+    echo 'Erro: Dados não recebidos corretamente.';
+}
+
+
     ?>
 
 

@@ -1,10 +1,12 @@
-CREATE DATABASE app_food;
+CREATE DATABASE app_food; 
+
+use app_food;
 
 CREATE TABLE usuariosetec( id int PRIMARY KEY AUTO_INCREMENT, tipo varchar(255), nsa varchar(255), nome varchar(255), username varchar(255), password varchar(255) );
 
 INSERT INTO usuariosetec (tipo, nsa, nome, username, password) VALUES
-('administrador', NULL, 'Admin', 'admin', 'senha123'),
-('aluno', '23006', 'Kauan', 'kauanafon3@gmail.com', 'senha1'),
+('administrador', 'admin', 'Admin', 'admin', '123'),
+('aluno', '23006', 'Kauan', 'kauanafon3@gmail.com', '123'),
 ('aluno', '58002', 'Rodrigo', 'rodrigo@1', 'senha2');
 
 
@@ -49,7 +51,6 @@ CREATE TABLE detalhePedidoEVenda (
     mensagemDoPedido varchar(200),
     idPedido int,
     IdProdutos int,
-    valorTotal float,
     FOREIGN KEY (idPedido) REFERENCES pedidos(id),
     FOREIGN KEY (IdProdutos) REFERENCES produtos(id)
 );
