@@ -1,31 +1,34 @@
 <?php
-session_start();
+// Conexão com o banco de dados
 require_once('db.php');
+session_start();
 
-header('Location: tela.inicial.php');
-?>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="tela.inicial.php">link</a>
-
-    <?php
-
-    // Verificar se os dados do formulário foram recebidos corretamente
-if (isset($_POST['produto_id']) && isset($_POST['produto_nome']) && isset($_POST['totalCompras'])) {
-    // Obtenha os valores dos campos ocultos diretamente
+// Verificar se os dados do formulário foram recebidos corretamente
+if (isset($_POST['produto_id'], $_POST['produto_nome'], $_POST['totalCompras'])) {
     $produtoIds = is_array($_POST['produto_id']) ? $_POST['produto_id'] : [];
     $produtoNomes = is_array($_POST['produto_nome']) ? $_POST['produto_nome'] : [];
     $totalCompra = $_POST['totalCompras'];
     $mensagem = isset($_POST['mensagem']) ? $_POST['mensagem'] : '';
+    $precosProdutos = $_POST['preco_produto'];
+
+
+    print_r($precosProdutos);
+    
+    // Novo array para armazenar os arrays divididos
+    $novoProdutoIds = [];
+    
+    // Iterar sobre os elementos do array $produtoIds
+    foreach ($produtoIds as $id) {
+        // Dividir o elemento usando a vírgula como delimitador
+        $idsSeparados = explode(',', $id);
+        
+        // Adicionar os IDs separados ao novo array
+        $novoProdutoIds = array_merge($novoProdutoIds, $idsSeparados);
+    }
+    
+    print_r($novoProdutoIds);
+    
+ 
 
     // Inicialize o array do carrinho se não existir
     if (!isset($_SESSION['carrinho_produtos'])) {
@@ -56,24 +59,29 @@ if (isset($_POST['produto_id']) && isset($_POST['produto_nome']) && isset($_POST
     $idPedido = $conn->insert_id;
 
     // Itere sobre os produtos e adicione-os ao banco de dados
-    foreach ($produtoIds as $i => $idDoProduto) {
-        $nomeDoProduto = $produtoNomes[$i];
+    foreach ($novoProdutoIds as $i => $idDoProduto) {
+     
 
         // Inserir os detalhes do pedido na tabela detalhepedidoevenda
         $insertDetalhesPedidos = $conn->prepare("INSERT INTO detalhepedidoevenda (mensagemDoPedido, idPedido, idProdutos) VALUES (?, ?, ?)");
         $insertDetalhesPedidos->bind_param("sii", $mensagem, $idPedido, $idDoProduto);
-        $insertDetalhesPedidos->execute();
+
+        // Executar a inserção
+        $resultado = $insertDetalhesPedidos->execute();
+
+        echo $mensagem . "<br>";
+        echo $idDoProduto . "<br>";
+        echo $idPedido . "<br>";
+
+
+        // Verificar erros na execução da consulta
+        if (!$resultado) {
+            echo "Erro ao adicionar detalhes do pedido para o produto: <br>";
+        }
     }
 
-    echo 'Pedido(s) adicionado(s) com sucesso!';
+    echo 'Detalhes do pedido adicionados com sucesso!';
 } else {
     echo 'Erro: Dados não recebidos corretamente.';
 }
-
-
-    ?>
-
-
-
-</body>
-</html>
+?>
