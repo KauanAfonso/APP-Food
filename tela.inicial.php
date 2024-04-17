@@ -556,6 +556,7 @@ if($queryProdutosDocesFinais->num_rows >0){
                   <h5 class="card-title">${nomeDoProduto}</h5>
                   <p class="card-text">${descricao}</p>
                   <p class="card-subtitle"><small class="text-muted">${precoDoProduto}</small></p>
+                  <input type="hidden" name="preco_produto[]" value="${precoDoProduto}">
                   <p class="card-text"><button type="button" class="btn btn-danger" data-id-produtos='${idDoProduto}' onclick="removerProduto()">Remover</button></p>
                 </div>
               </div>
@@ -579,23 +580,30 @@ if($queryProdutosDocesFinais->num_rows >0){
 
 
   });
-  function preencherCamposEEnviar() {
+   function preencherCamposEEnviar() {
     var produtoIds = [];
     var produtoNomes = [];
-    var valorTotalEmInput= document.getElementById("totalCompraInput").value;
-    valorTotalEmInput+= contador;
+    var precosProdutos = []; // Nova matriz para armazenar os preços dos produtos
+    var valorTotalEmInput = parseFloat(document.getElementById("totalCompraInput").value); // Certifique-se de que o valor total seja um número
 
     $('#produtosNoCarrinho li').each(function() {
         var idDoProduto = $(this).find('.btn-danger').data('idProdutos');
         var nomeDoProduto = $(this).find('.card-title').text();
+        var precoDoProduto = parseFloat($(this).find('.card-subtitle small').text()); // Obtém o preço do produto
 
         produtoIds.push(idDoProduto);
         produtoNomes.push(nomeDoProduto);
+        precosProdutos.push(precoDoProduto); // Adiciona o preço do produto à matriz de preços
     });
 
-    $('#produto_id').val(produtoIds.join(','));
+    $('#produto_id').val(produtoIds.join(',')); 
     $('#produto_nome').val(produtoNomes.join(','));
-    $('#totalCompraInput').val(valorTotalEmInput); // Corrigir para corresponder ao nome do campo no HTML
+    $('#totalCompraInput').val(valorTotalEmInput + contador); // Atualiza o valor total
+
+    // Adiciona os preços dos produtos como campos ocultos ao formulário
+    for (var i = 0; i < precosProdutos.length; i++) {
+        $('#formCarrinho').append('<input type="hidden" name="precos_produto[]" value="' + precosProdutos[i] + '">');
+    }
 
     $('#formCarrinho').submit();
     window.location.href = 'tela.inicial.php';
