@@ -12,7 +12,9 @@ if (isset($_POST['produto_id'], $_POST['produto_nome'], $_POST['totalCompras']))
     $precosProdutos = $_POST['preco_produto'];
 
 
-    print_r($precosProdutos);
+    print_r($precosProdutos); 
+
+    print_r($mensagem);
     
     // Novo array para armazenar os arrays divididos
     $novoProdutoIds = [];

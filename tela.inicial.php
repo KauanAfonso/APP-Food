@@ -134,7 +134,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
   <input type="hidden" name="produto_nome[]" id="produto_nome" value="">
   <!-- Adicione outros campos ocultos conforme necessário -->
 
-  <textarea id="mensagem" name="mensagem" rows="5" cols="28" placeholder="Tirar cebola..."></textarea>
+
   <h5 id="totalCompra" name="totalCompra"></h5>
   <input type="hidden" name="totalCompras" id="totalCompraInput" value="">
   <button type="submit" class="btn btn-success" onclick="preencherCamposEEnviar()" id='finalizarCompra'>Finalizar Compra</button>
@@ -557,6 +557,7 @@ if($queryProdutosDocesFinais->num_rows >0){
                   <p class="card-text">${descricao}</p>
                   <p class="card-subtitle"><small class="text-muted">${precoDoProduto}</small></p>
                   <input type="hidden" name="preco_produto[]" value="${precoDoProduto}">
+                  <textarea id="mensagem" name="mensagem[]" rows="3" cols="18" placeholder="Tirar cebola..."></textarea>
                   <p class="card-text"><button type="button" class="btn btn-danger" data-id-produtos='${idDoProduto}' onclick="removerProduto()">Remover</button></p>
                 </div>
               </div>
@@ -584,18 +585,22 @@ if($queryProdutosDocesFinais->num_rows >0){
     var produtoIds = [];
     var produtoNomes = [];
     var precosProdutos = []; // Nova matriz para armazenar os preços dos produtos
+    var mensagem = []
     var valorTotalEmInput = parseFloat(document.getElementById("totalCompraInput").value); // Certifique-se de que o valor total seja um número
+    var mensagemValor = document.getElementByName("mensagem[]".value);
 
     $('#produtosNoCarrinho li').each(function() {
         var idDoProduto = $(this).find('.btn-danger').data('idProdutos');
         var nomeDoProduto = $(this).find('.card-title').text();
         var precoDoProduto = parseFloat($(this).find('.card-subtitle small').text()); // Obtém o preço do produto
 
+        mensagem.push(mensagemValor);
         produtoIds.push(idDoProduto);
         produtoNomes.push(nomeDoProduto);
         precosProdutos.push(precoDoProduto); // Adiciona o preço do produto à matriz de preços
     });
 
+    $('#mensagens').val(mensagem.join(','));
     $('#produto_id').val(produtoIds.join(',')); 
     $('#produto_nome').val(produtoNomes.join(','));
     $('#totalCompraInput').val(valorTotalEmInput + contador); // Atualiza o valor total
