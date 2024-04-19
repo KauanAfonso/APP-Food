@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $password = $_POST['password'];
     $tipo = $_POST['tipo'];
 
-    $query = "INSERT INTO usuariosetec (tipo, nsa, nome, username, password) VALUES ('$tipo', '$nsa', '$name', '$username', '$password')";
+    $query = "INSERT INTO usuariosetec (tipo, rm, nome, usuario, senha) VALUES ('$tipo', '$nsa', '$name', '$username', '$password')";
     $result = $conn->query($query);
 
 

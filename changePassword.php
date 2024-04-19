@@ -47,11 +47,11 @@
 
                         //esse arquivo não foi configurado com elementos de segurança;
                         //é vunerável a ataques de injeção de sql;
-                        $query = "SELECT * FROM usuariosetec WHERE username = '$username' ";
+                        $query = "SELECT * FROM usuariosetec WHERE usuario = '$username' ";
                         $result = $conn ->query($query);
 
                         if($result-> num_rows === 1  && $password1 == $password2){ 
-                            $queryAlterarSenha = "UPDATE `usuariosetec` SET `password` = '$password2' WHERE `username` = '$username'";
+                            $queryAlterarSenha = "UPDATE `usuariosetec` SET `senha` = '$password2' WHERE `usuarioo` = '$username'";
                             $uptade = $conn->query($queryAlterarSenha);
                             echo "Senha atualizada com sucesso!";
                             echo "<a href='./login.php'>Login</a>";

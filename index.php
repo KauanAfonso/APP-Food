@@ -47,7 +47,7 @@
 
                         //esse arquivo não foi configurado com elementos de segurança;
                         //é vunerável a ataques de injeção de sql;
-                        $query = "SELECT * FROM usuariosetec WHERE username = '$username' AND password = '$password' AND nsa = '$nsa' ";
+                        $query = "SELECT * FROM usuariosetec WHERE usuario = '$username' AND senha = '$password' AND rm = '$nsa' ";
                         $result = $conn ->query($query);
 
                         if($result-> num_rows === 1  && $username === "admin"){ //o adm entra como adimin no nsa;

@@ -9,7 +9,7 @@ require_once('db.php');
 
 
 
-$usuario = "SELECT nome FROM usuariosetec WHERE username = '{$_SESSION['username']}'";
+$usuario = "SELECT nome FROM usuariosetec WHERE usuario = '{$_SESSION['username']}'";
 $result = $conn->query($usuario);
 
 
@@ -585,22 +585,21 @@ if($queryProdutosDocesFinais->num_rows >0){
     var produtoIds = [];
     var produtoNomes = [];
     var precosProdutos = []; // Nova matriz para armazenar os preços dos produtos
-    var mensagem = []
+    var mensagem = [];
     var valorTotalEmInput = parseFloat(document.getElementById("totalCompraInput").value); // Certifique-se de que o valor total seja um número
-    var mensagemValor = document.getElementByName("mensagem[]".value);
+
 
     $('#produtosNoCarrinho li').each(function() {
         var idDoProduto = $(this).find('.btn-danger').data('idProdutos');
         var nomeDoProduto = $(this).find('.card-title').text();
         var precoDoProduto = parseFloat($(this).find('.card-subtitle small').text()); // Obtém o preço do produto
 
-        mensagem.push(mensagemValor);
         produtoIds.push(idDoProduto);
         produtoNomes.push(nomeDoProduto);
         precosProdutos.push(precoDoProduto); // Adiciona o preço do produto à matriz de preços
     });
 
-    $('#mensagens').val(mensagem.join(','));
+
     $('#produto_id').val(produtoIds.join(',')); 
     $('#produto_nome').val(produtoNomes.join(','));
     $('#totalCompraInput').val(valorTotalEmInput + contador); // Atualiza o valor total

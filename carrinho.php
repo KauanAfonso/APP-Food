@@ -4,22 +4,18 @@ require_once('db.php');
 session_start();
 
 // Verificar se os dados do formulário foram recebidos corretamente
-if (isset($_POST['produto_id'], $_POST['produto_nome'], $_POST['totalCompras'])) {
+if (!empty($_POST['produto_id']) && !empty($_POST['produto_nome']) && isset($_POST['totalCompras'])) {
     $produtoIds = is_array($_POST['produto_id']) ? $_POST['produto_id'] : [];
     $produtoNomes = is_array($_POST['produto_nome']) ? $_POST['produto_nome'] : [];
     $totalCompra = $_POST['totalCompras'];
-    $mensagem = isset($_POST['mensagem']) ? $_POST['mensagem'] : '';
-    $precosProdutos = $_POST['preco_produto'];
 
+    // $precosProdutos = $_POST['preco_produto'];
 
-    print_r($precosProdutos); 
-
-    print_r($mensagem);
+    print_r($produtoIds);
+    // print_r($precosProdutos);
     
     // Novo array para armazenar os arrays divididos
     $novoProdutoIds = [];
-    $novoPrecoProdtuo = [];
-    $novaMensagem = [];
     
     // Iterar sobre os elementos do array $produtoIds
     foreach ($produtoIds as $id) {
@@ -31,6 +27,10 @@ if (isset($_POST['produto_id'], $_POST['produto_nome'], $_POST['totalCompras']))
     }
     
     print_r($novoProdutoIds);
+
+    var_dump($_POST['produto_id']);
+
+
     
  
 
