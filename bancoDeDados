@@ -2,13 +2,30 @@ CREATE DATABASE app_food;
 
 use app_food;
 
-CREATE TABLE usuariosetec( id int PRIMARY KEY AUTO_INCREMENT, tipo varchar(255), nsa varchar(255), nome varchar(255), username varchar(255), password varchar(255) );
+CREATE TABLE usuariosetec( 
+    id int PRIMARY KEY AUTO_INCREMENT, 
+    tipo varchar(255),
+    rm varchar(255),
+    nome varchar(255),
+    usuario varchar(255),
+    senha varchar(255)
+);
 
-INSERT INTO usuariosetec (tipo, nsa, nome, username, password) VALUES
+INSERT INTO usuariosetec (tipo, rm, nome, usuario, senha) VALUES
 ('administrador', 'admin', 'Admin', 'admin', '123'),
 ('aluno', '23006', 'Kauan', 'kauanafon3@gmail.com', '123'),
 ('aluno', '58002', 'Rodrigo', 'rodrigo@1', 'senha2');
 
+CREATE table mensagens(
+	
+    id int AUTO_INCREMENT PRIMARY KEY,
+    idUsuario int,
+    titulo varchar(250),
+    texto varchar(550),
+    
+    FOREIGN KEY (idUsuario) REFERENCES usuariosEtec(id)
+
+);
 
 CREATE TABLE produtos (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -16,7 +33,7 @@ CREATE TABLE produtos (
     categoria VARCHAR(255),
     descricao VARCHAR(255),
     preco FLOAT,
-    imagem VARCHAR(255) -- Coluna para armazenar o caminho da imagem
+    imagem VARCHAR(255) 
 );
 
 
@@ -46,11 +63,77 @@ CREATE TABLE pedidos (
     FOREIGN KEY (IdUsuarios) REFERENCES usuariosetec(id)
 );
 
-CREATE TABLE detalhePedidoEVenda (
+CREATE TABLE itens (
     id int PRIMARY KEY AUTO_INCREMENT,
-    mensagemDoPedido varchar(200),
+    mensagem varchar(200),
     idPedido int,
-    IdProdutos int,
+    IdProduto int,
     FOREIGN KEY (idPedido) REFERENCES pedidos(id),
-    FOREIGN KEY (IdProdutos) REFERENCES produtos(id)
+    FOREIGN KEY (IdProduto) REFERENCES produtos(id),
+    
+    precoUnitario float,
+    statusItem varchar(25)
 );
+
+
+
+
+
+
+------------------------------------------------------versao antiga-----------------------------------------------------------
+-- CREATE DATABASE app_food; 
+
+-- use app_food;
+
+-- CREATE TABLE usuariosetec( id int PRIMARY KEY AUTO_INCREMENT, tipo varchar(255), nsa varchar(255), nome varchar(255), username varchar(255), password varchar(255) );
+
+-- INSERT INTO usuariosetec (tipo, nsa, nome, username, password) VALUES
+-- ('administrador', 'admin', 'Admin', 'admin', '123'),
+-- ('aluno', '23006', 'Kauan', 'kauanafon3@gmail.com', '123'),
+-- ('aluno', '58002', 'Rodrigo', 'rodrigo@1', 'senha2');
+
+
+-- CREATE TABLE produtos (
+--     id INT PRIMARY KEY AUTO_INCREMENT,
+--     nome VARCHAR(255),
+--     categoria VARCHAR(255),
+--     descricao VARCHAR(255),
+--     preco FLOAT,
+--     imagem VARCHAR(255) -- Coluna para armazenar o caminho da imagem
+-- );
+
+
+-- INSERT INTO produtos (nome, categoria, descricao, preco, imagem) VALUES
+--     ('Batata Frita', 'Batatas', 'Porção de batatas fritas crocantes', 9.99, 'https://tse3.mm.bing.net/th?id=OIP.2-lJR_WzdzOYZZw7jWMsCwHaE8&pid=Api&P=0&h=180'),
+--     ('Batata Cheddar e Bacon', 'Batatas', 'Porção de batatas fritas com cheddar e bacon', 14.99, 'http://braseirorestaurante.com.br/wp-content/uploads/2020/07/Batata-Frita-com-Cheddar-e-Bacon.jpg'),
+--     ('Batata Rústica', 'Batatas', 'Batatas rústicas assadas no forno', 12.99, 'https://folhadomate.com/wp-content/uploads/2020/09/mini_gastronomia1.jpg'),
+--     ('X-Bacon', 'Lanches', 'Sanduíche com hambúrguer, bacon, queijo, alface e tomate', 12.99, 'https://tse2.explicit.bing.net/th?id=OIP.Rtx4iye-2rHVLHi1l2uOfAHaEn&pid=Api&P=0&h=180'),
+--     ('X-Salada', 'Lanches', 'Sanduíche com hambúrguer, queijo, alface e tomate', 10.99, 'https://www.receiteria.com.br/wp-content/uploads/Receitas-de-x-salada-1.jpg'),
+--     ('X-Frango', 'Lanches', 'Sanduíche com filé de frango grelhado, queijo, alface e tomate', 10.49 , 'https://tse2.mm.bing.net/th?id=OIP.Ezvi-7snK_ZPaDFuZdxUbQHaE6&pid=Api&P=0&h=180'),
+--     ('X-Calabresa', 'Lanches', 'Sanduíche com linguiça calabresa, queijo, molho de tomate e cebola', 10.99, 'https://aimg.comendo.com.br/produtos/1000/17072514242459777ec86408f.jpg'),
+--     ('X-Tudo', 'Lanches', 'O clássico sanduíche X-Tudo com hambúrguer, bacon, ovo, presunto, queijo, alface, tomate, milho, ervilha, maionese e ketchup', 15.99, 'https://tse1.mm.bing.net/th?id=OIP.6U5JKy4l1dVjcB_w5hR0rwHaEj&pid=Api&rs=1&c=1&qlt=95&w=162&h=99'),
+--     ('Pastel de Carne', 'Pasteis', 'Pastel recheado com carne moída temperada', 6.50, 'https://blog.sonoma.com.br/wp-content/uploads/2019/09/1864/nmavq4bgnq42oyho8hy3.jpg'),
+--     ('Pastel de Queijo', 'Pasteis', 'Pastel recheado com queijo derretido', 6.00, 'https://loja.barracadoze.com.br/wp-content/uploads/sites/5/2020/10/pastel-queijo.jpg'),
+--     ('Brigadeiro', 'Doces', 'Doce tradicional brasileiro feito com chocolate e leite condensado', 2.50, 'https://i0.statig.com.br/bancodeimagens/bz/9z/ch/bz9zch7m9qkuixsfjmv9bhmow.jpg'),
+--     ('Beijinho', 'Doces', 'Docinho feito com coco e leite condensado, coberto com açúcar', 1.25, 'https://ogimg.infoglobo.com.br/rio/bairros/24074836-749-05e/FT1086A/652/Carolina-Sales-Beijinho-de-coco.jpg'),
+--     ('Coxinha de Frango', 'Salgados', 'Salgado em formato de coxinha recheado com frango desfiado', 6.75, 'https://cdn.cuecasnacozinha.com.br/wp-content/uploads/2013/12/2_Mini-coxinhas-recheadas-com-galinha-caipira-e-fonduta-de-catupiry-_Cr%C3%A9ditos-Mauro-Holanda_Home.jpg'),
+--     ('Bolinha de Queijo', 'Salgados', 'Salgado em formato de bolinha recheado com queijo derretido', 2.50, 'https://tse1.mm.bing.net/th?id=OIP.yKRa9fYSBXT8DRkaaICfuAHaE7&pid=Api&P=0&h=180'),
+--     ('Cachorro-Quente', 'Lanches', 'Pão com salsicha, molho de tomate, maionese, ketchup e mostarda', 11.99, 'https://www.mmo.co.mz/wp-content/uploads/2016/07/Cachorro-Quente.jpg');
+
+
+-- CREATE TABLE pedidos (
+--     id int PRIMARY KEY AUTO_INCREMENT,
+--     IdUsuarios int,
+--     dataDaCompra date,
+--     valorTotalDoPedido float,
+--     FOREIGN KEY (IdUsuarios) REFERENCES usuariosetec(id)
+-- );
+
+-- CREATE TABLE detalhePedidoEVenda (
+--     id int PRIMARY KEY AUTO_INCREMENT,
+--     mensagemDoPedido varchar(200),
+--     idPedido int,
+--     IdProdutos int,
+--     FOREIGN KEY (idPedido) REFERENCES pedidos(id),
+--     FOREIGN KEY (IdProdutos) REFERENCES produtos(id)
+-- );

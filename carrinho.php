@@ -18,6 +18,8 @@ if (isset($_POST['produto_id'], $_POST['produto_nome'], $_POST['totalCompras']))
     
     // Novo array para armazenar os arrays divididos
     $novoProdutoIds = [];
+    $novoPrecoProdtuo = [];
+    $novaMensagem = [];
     
     // Iterar sobre os elementos do array $produtoIds
     foreach ($produtoIds as $id) {
