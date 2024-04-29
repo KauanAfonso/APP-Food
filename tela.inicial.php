@@ -586,14 +586,18 @@ if($queryProdutosDocesFinais->num_rows >0){
     var produtoNomes = [];
     var precosProdutos = []; // Nova matriz para armazenar os preços dos produtos
     var mensagem = [];
+    var mensagensProdutos = [];
+
     var valorTotalEmInput = parseFloat(document.getElementById("totalCompraInput").value); // Certifique-se de que o valor total seja um número
 
 
     $('#produtosNoCarrinho li').each(function() {
+      var mensagemDoProduto = $(this).find('textarea').val();
         var idDoProduto = $(this).find('.btn-danger').data('idProdutos');
         var nomeDoProduto = $(this).find('.card-title').text();
         var precoDoProduto = parseFloat($(this).find('.card-subtitle small').text()); // Obtém o preço do produto
 
+        mensagensProdutos.push(mensagemDoProduto);
         produtoIds.push(idDoProduto);
         produtoNomes.push(nomeDoProduto);
         precosProdutos.push(precoDoProduto); // Adiciona o preço do produto à matriz de preços
@@ -603,6 +607,13 @@ if($queryProdutosDocesFinais->num_rows >0){
     $('#produto_id').val(produtoIds.join(',')); 
     $('#produto_nome').val(produtoNomes.join(','));
     $('#totalCompraInput').val(valorTotalEmInput + contador); // Atualiza o valor total
+    $('#mensagem_produto').val(mensagensProdutos.join(',')); // Crie um input hidden para armazenar as mensagens
+
+    // Adicione os valores dos textareas como campos ocultos ao formulário
+    for (var i = 0; i < mensagensProdutos.length; i++) {
+   $('#formCarrinho').append('<input type="hidden" name="mensagens_produto[]" value="' + mensagensProdutos[i] + '">');
+    }
+
 
     // Adiciona os preços dos produtos como campos ocultos ao formulário
     for (var i = 0; i < precosProdutos.length; i++) {

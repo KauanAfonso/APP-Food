@@ -8,29 +8,38 @@ if (!empty($_POST['produto_id']) && !empty($_POST['produto_nome']) && isset($_PO
     $produtoIds = is_array($_POST['produto_id']) ? $_POST['produto_id'] : [];
     $produtoNomes = is_array($_POST['produto_nome']) ? $_POST['produto_nome'] : [];
     $totalCompra = $_POST['totalCompras'];
+    $mensagensProdutos = is_array($_POST['mensagens_produto']) ? $_POST['mensagens_produto'] : []; // Recupere as mensagens
+    
+    // Imprima os IDs, nomes e mensagens dos produtos
 
-    // $precosProdutos = $_POST['preco_produto'];
 
-    print_r($produtoIds);
-    // print_r($precosProdutos);
+    print_r($mensagensProdutos);
     
     // Novo array para armazenar os arrays divididos
     $novoProdutoIds = [];
+    $nomes = [];
     
     // Iterar sobre os elementos do array $produtoIds
     foreach ($produtoIds as $id) {
-        // Dividir o elemento usando a vírgula como delimitador
-        $idsSeparados = explode(',', $id);
-        
-        // Adicionar os IDs separados ao novo array
-        $novoProdutoIds = array_merge($novoProdutoIds, $idsSeparados);
+      // Dividir o elemento usando a vírgula como delimitador
+      $idsSeparados = explode(',', $id);
+    
+      // Adicionar os IDs separados ao novo array
+      $novoProdutoIds = array_merge($novoProdutoIds, $idsSeparados);
     }
     
     print_r($novoProdutoIds);
+    
 
-    var_dump($_POST['produto_id']);
+     foreach ($produtoNomes as $id) {
+       
+        $idsSeparados = explode(',', $id);
 
+        $nomes = array_merge($nomes, $idsSeparados);
+      }
+  
 
+    print_r($nomes);
     
  
 
