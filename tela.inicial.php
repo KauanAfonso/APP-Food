@@ -582,13 +582,13 @@ if($queryProdutosDocesFinais->num_rows >0){
 
   });
    function preencherCamposEEnviar() {
+   
     var produtoIds = [];
     var produtoNomes = [];
     var precosProdutos = []; // Nova matriz para armazenar os preços dos produtos
     var mensagem = [];
     var mensagensProdutos = [];
 
-    var valorTotalEmInput = parseFloat(document.getElementById("totalCompraInput").value); // Certifique-se de que o valor total seja um número
 
 
     $('#produtosNoCarrinho li').each(function() {
@@ -606,7 +606,7 @@ if($queryProdutosDocesFinais->num_rows >0){
 
     $('#produto_id').val(produtoIds.join(',')); 
     $('#produto_nome').val(produtoNomes.join(','));
-    $('#totalCompraInput').val(valorTotalEmInput + contador); // Atualiza o valor total
+    $('#totalCompraInput').val(contador); // Atualiza o valor total
     $('#mensagem_produto').val(mensagensProdutos.join(',')); // Crie um input hidden para armazenar as mensagens
 
     // Adicione os valores dos textareas como campos ocultos ao formulário

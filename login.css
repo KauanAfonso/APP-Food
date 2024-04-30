@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cor0: #940707;
+    --cor1: #d9d9d9;
+    --cor2: #77b513;
+    --cor3: #4a0000;
+    --cor4: #ababab;
+
+}
+
+
+body {
+    background-image: url(imagem/tela_login/plano_de_fundo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+
+
+header>h1 {
+    text-align: center;
+    color: white;
+    padding-top: 2%;
+    margin: 0px;
+}
+
+main {
+    width: 80vw;
+    height: 95vh;
+    max-width: 800px;
+    max-height: 500px;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.container {
+    display: flex;
+
+}
+
+
+div {
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+}
+
+
+#container-a {
+    background-color: var(--cor1);
+    border-radius: 10px 0px 0px 10px;
+
+}
+#container-b {
+    background-color: white;
+    background-image: url(imagem/tela_login/etec_logon.jpg);
+    
+    border-radius: 0px 10px 10px 0px;
+
+}
+
+
+#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
+
+#login > input {
+    text-align: center;
+    background-color: #ababab;
+    margin-bottom: 10%;
+    width: 100%;
+}
+#login > select {
+    text-align: center;
+    background-color: #ababab;
+    margin-bottom: 10%;
+    width: 100%;
+}
+
+#login > button {
+    background-color: #830101;
+    width: 100%;
+    
+}
+
+footer>p {
+    text-align: center;
+    color: white;
+    bottom: 0px;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    margin: 0px;
+}
+
+footer>p>img {
+    max-width: 25px;
+}
+
+
+@media screen and (max-width: 900px){
+    
+    #container-b{
+        display: none;
+    }
+
+    div {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+   }
+
+    #container-a {
+       padding-right: 10%;
+       padding-left: 10%;
+        border-radius: 10px;
+    }
+}
