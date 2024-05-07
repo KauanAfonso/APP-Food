@@ -59,7 +59,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APP Food</title>
-  <link rel="stylesheet" href="style.inicial.css">
+  <link rel="stylesheet" href="tela.inicial.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -186,6 +186,12 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
       </div>
     </div>
     <p class='todosProdutos' style="margin-top: 580px;display:;">
+
+
+    <div class="search-container">
+  <input type="text" id="search-input" placeholder="Pesquisar produtos...">
+  <button class='btnPesquisar' onclick="searchProducts()">Pesquisar</button>
+</div>
 
 
       <?php
