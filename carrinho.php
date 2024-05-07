@@ -141,14 +141,15 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
     <title>Seus Pedidos</title>
 </head>
 <body>
-    <table>
-        <tr>
+        <table>
+            <tr>
             <th>Pedido ID</th>
             <th>Data da Compra</th>
             <th>Produto</th>
             <th>Mensagem</th>
             <th>Preço Unitário</th>
             <th>Status</th>
+            <th>Cancelar</th> <!-- Adicionando uma nova coluna para a ação -->
         </tr>
         <?php
             while ($rowDetalhesPedido = $resultDetalhesPedido->fetch_assoc()) {
@@ -159,28 +160,47 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
                 echo "<td>{$rowDetalhesPedido['mensagem']}</td>";
                 echo "<td>{$rowDetalhesPedido['precoUnitario']}</td>";
                 echo "<td>{$rowDetalhesPedido['statusItem']}</td>";
-                echo "<td><button>Cancelar</button></td>";
+                // Adicionando um formulário com um botão de cancelar pedido
+                echo "<td>";
+                echo "<form action='cancelar_pedido.php' method='POST'>";
+                echo "<input type='hidden' name='pedido_id' value='{$rowDetalhesPedido['pedido_id']}'>"; // Envia o ID do pedido via POST
+                echo "<button type='submit' name='cancelar_pedido'>Cancelar Pedido</button>";
+                echo "</form>";
+                echo "</td>";
                 echo "</tr>";
-
             }
         ?>
+
     </table>
     <?php
-    // Consulta para obter o valor total dos pedidos do usuário
-    $valorTotalQuery = "SELECT SUM(valorTotalDoPedido) AS valorTotal FROM pedidos WHERE IdUsuarios = ?";
-    $stmtValorTotal = $conn->prepare($valorTotalQuery);
-    $stmtValorTotal->bind_param("i", $idUsuario);
-    $stmtValorTotal->execute();
-    $resultValorTotal = $stmtValorTotal->get_result();
+        // Consulta para obter o valor total dos pedidos do usuário, considerando apenas os itens não rejeitados
+        $valorTotalQuery = "SELECT SUM(pedidos.valorTotalDoPedido) AS valorTotal 
+        FROM pedidos 
+        INNER JOIN itens ON pedidos.id = itens.idPedido
+        WHERE pedidos.IdUsuarios = ? AND itens.statusItem = 'aceito'";
+        
 
-    if ($resultValorTotal && $rowValorTotal = $resultValorTotal->fetch_assoc()) {
-        $valorTotal = $rowValorTotal['valorTotal'];
-        // Formatar o valor para exibir apenas duas casas decimais após a vírgula
-        $valorTotalFormatado = number_format($valorTotal, 2, ',', '.');
-        echo "<h3>Valor total: R$ $valorTotalFormatado</h3>";
-    } else {
-        echo "Erro ao calcular o valor total dos pedidos.";
-    }
+        $stmtValorTotal = $conn->prepare($valorTotalQuery);
+        $stmtValorTotal->bind_param("i", $idUsuario);
+        $stmtValorTotal->execute();
+        $resultValorTotal = $stmtValorTotal->get_result();
+
+
+        if ($resultValorTotal && $rowValorTotal = $resultValorTotal->fetch_assoc()) {
+            $valorTotal = $rowValorTotal['valorTotal'];
+            // Formatar o valor para exibir apenas duas casas decimais após a vírgula
+            $valorTotalFormatado = number_format($valorTotal, 2, ',', '.');
+            echo "<h3>Valor total: R$ $valorTotalFormatado</h3>";
+            
+            // Verificar se o valor total é maior que zero (ou qualquer outra condição que desejar)
+            if ($valorTotal > 0) {
+                // Aqui você coloca o código para o botão
+                echo "<button type='button'>Comprar</button>";
+            }
+        } else {
+            echo "Erro ao calcular o valor total dos pedidos.";
+        }
+        
 ?>
 
 
@@ -195,3 +215,6 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
     exit;
 }
 ?>
+
+
+

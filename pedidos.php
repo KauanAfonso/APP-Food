@@ -1,14 +1,19 @@
 <?php
-// Conexão com o banco de dados
 require_once('db.php');
 
-$query = "SELECT pedidos.id AS idPedido, usuariosetec.nome AS nomeUsuario, pedidos.dataDaCompra, itens.precoUnitario, itens.mensagem, produtos.nome AS nomeProduto 
+$query = "SELECT pedidos.id AS idPedido, 
+                 usuariosetec.nome AS nomeUsuario, 
+                 pedidos.dataDaCompra, 
+                 itens.precoUnitario, 
+                 itens.mensagem, 
+                 produtos.nome AS nomeProduto,
+                 itens.statusItem,
+                 itens.id AS idItem
           FROM pedidos 
           INNER JOIN usuariosetec ON pedidos.IdUsuarios = usuariosetec.id 
-          INNER JOIN itens ON pedidos.id = itens.idPedido 
+          LEFT JOIN itens ON pedidos.id = itens.idPedido 
           INNER JOIN produtos ON itens.IdProduto = produtos.id 
           ORDER BY pedidos.dataDaCompra DESC";
-
 
 $result = $conn->query($query);
 
@@ -36,11 +41,11 @@ if (!$result) {
                 <th>Mensagem do Pedido</th>
                 <th>Nome do Produto</th>
                 <th>Status</th>
-                <th>Finalizar Pedido</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            <?php while ($row = $result->fetch_assoc()) : ?>
+        <?php while ($row = $result->fetch_assoc()) : ?>
             <tr>
                 <td><?php echo $row['idPedido']; ?></td>
                 <td><?php echo $row['nomeUsuario']; ?></td>
@@ -48,16 +53,22 @@ if (!$result) {
                 <td><?php echo number_format($row['precoUnitario'], 2, ',', '.'); ?></td>
                 <td><?php echo $row['mensagem']; ?></td>
                 <td><?php echo $row['nomeProduto']; ?></td>
-                <td><Button>Rejeitar</Button><button>Aceitar</button></td>
+                <td><?php echo $row['statusItem']; ?></td>
+                <td>
+                    <form action="atualizar_status.php" method="post">
+                        <input type="hidden" name="item_id" value="<?php echo $row['idItem']; ?>">
+                        <button type="submit" name="rejeitar">Rejeitar</button>
+                        <button type="submit" name="aceitar">Aceitar</button>
+                    </form>
+                </td>
                 <td><button>Finalizar Pedido</button></td>
             </tr>
-            <?php endwhile; ?>
+        <?php endwhile; ?>
         </tbody>
     </table>
 </body>
 </html>
 
 <?php
-// Fechar a conexão com o banco de dados
 $conn->close();
 ?>
