@@ -1,50 +1,124 @@
 <?php
-
 session_start();
-
 require_once('db.php');
-
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Excluir Produto</title>
+    <!-- Integração do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Estilo para a tabela */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            
+        }
+
+        img{
+            width: 300px;
+        }
+        th {
+            background-color: #343a40; /* Preto */
+            color: #fff; /* Texto branco */
+        }
+        tr:nth-child(even) {
+            background-color: #f8f2f2; /* Cinza */
+        }
+        /* Estilo para os botões */
+        .btn-excluir {
+            background-color: #dc3545; /* Vermelho */
+            color: #fff; /* Texto branco */
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-excluir:hover {
+            background-color: #c82333; /* Vermelho mais escuro no hover */
+        }
+    </style>
 </head>
 <body>
-    
 
+<div class="container">
+    <h2>Lista de Produtos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $query = "SELECT * FROM produtos";
+            $result = $conn->query($query);
 
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>{$row['id']}</td>";
+                    echo "<td><img src='{$row['imagem']}'></td>";
+                    echo "<td>{$row['nome']}</td>";
+                    echo "<td>{$row['categoria']}</td>";
+                    echo "<td>{$row['descricao']}</td>";
+                    echo "<td>{$row['preco']}</td>";
+                    echo "<td>
+                            <form action='ExcluirProduto.php' method='POST'>
+                                <input type='hidden' name='idProdutoExcluir' value='{$row['id']}'>
+                                <button type='submit' class='btn btn-excluir' onclick='return confirmarExclusao();'>Excluir</button>
+                            </form>
+                          </td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>Nenhum produto encontrado</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 
-<form action="ExcluirProduto.php" method="POST">
-    <h2>Excluir Produto</h2>
-    <input type="number" name='idProduto' id='idProduto' placeholder='Digite o id do produto'>
-    <input type="number" name='idProduto2' id='idProduto2' placeholder='Digite o id do produto novamente'>
-    <input type="submit">
-
-</form>
-
-
+<script>
+    function confirmarExclusao() {
+        return confirm("Tem certeza que deseja excluir este produto?");
+    }
+</script>
 
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $idProduto1 = $_POST['idProduto'];
-    $idProduto2 = $_POST['idProduto2'];
-
-    if ($idProduto1 === $idProduto2) {
+    if (isset($_POST['idProdutoExcluir'])) {
         // Utilize instruções preparadas para evitar injeção de SQL
+        $idProdutoExcluir = $_POST['idProdutoExcluir'];
         $query2 = $conn->prepare("DELETE FROM produtos WHERE id = ?");
-        $query2->bind_param("i", $idProduto2);
+        $query2->bind_param("i", $idProdutoExcluir);
 
         // Execute a instrução preparada
         $delete = $query2->execute();
 
         if ($delete === true) {
             if ($conn->affected_rows > 0) {
-                echo "Produto excluído";
+                echo "<script>window.location.reload();</script>";
             } else {
                 echo "Nenhum produto encontrado com o ID especificado";
             }
@@ -55,13 +129,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Feche a instrução preparada
         $query2->close();
     } else {
-        echo "Os IDs dos produtos não coincidem";
+        echo "Os IDs dos produtos não foram fornecidos";
     }
 }
 
 // Feche a conexão com o banco de dados
 $conn->close();
-
 ?>
 
 </body>

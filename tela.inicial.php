@@ -86,7 +86,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
     </nav>
 
     <a href="#">SOBRE</a>
-    <a href="#">LOGIN</a>
+    <a href="carrinho.php">Pedidos</a>
     <a href="#">SAIR</a>
 
     <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">CARRINHO</a>
