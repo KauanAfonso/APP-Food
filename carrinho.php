@@ -87,9 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $precoUnitario = $row['preco'];
         }
 
+      
         // Inserir os detalhes do pedido na tabela itens
         $insertDetalhesPedido = $conn->prepare("INSERT INTO itens (mensagem, idPedido, IdProduto, precoUnitario, statusItem) VALUES (?, ?, ?, ?, 'Pendente')");
-        $insertDetalhesPedido->bind_param("sidi", $mensagem, $idPedido, $idDoProduto, $precoUnitario);
+        $insertDetalhesPedido->bind_param("siid", $mensagem, $idPedido, $idDoProduto, $precoUnitario);
         $insertDetalhesPedido->execute();
 
         // Verificar erros na execução da consulta
@@ -121,11 +122,12 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
     $idUsuario = $rowUsuarioId['id'];
 
     // Consulta para obter os detalhes do pedido do usuário
-    $detalhesPedidoQuery = "SELECT p.id as pedido_id, p.dataDaCompra, p.valorTotalDoPedido, i.mensagem, i.precoUnitario, i.statusItem, pr.nome as produto_nome
-                            FROM pedidos p
-                            JOIN itens i ON p.id = i.idPedido
-                            JOIN produtos pr ON i.IdProduto = pr.id
-                            WHERE p.IdUsuarios = ?";
+    $detalhesPedidoQuery = "SELECT p.id as pedido_id, p.dataDaCompra, p.valorTotalDoPedido, i.mensagem, i.precoUnitario, i.statusItem, pr.nome as produto_nome, i.precoUnitario as precoUnitario
+    FROM pedidos p
+    JOIN itens i ON p.id = i.idPedido
+    JOIN produtos pr ON i.IdProduto = pr.id
+    WHERE p.IdUsuarios = ?";
+
     $stmtDetalhesPedido = $conn->prepare($detalhesPedidoQuery);
     $stmtDetalhesPedido->bind_param("i", $idUsuario);
     $stmtDetalhesPedido->execute();
