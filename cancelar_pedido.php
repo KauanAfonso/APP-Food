@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancelar_pedido'])) {
         
         if ($stmt->execute()) {
             echo "Pedido cancelado com sucesso!";
+            header('location: carrinho.php');
         } else {
             echo "Erro ao cancelar o pedido.";
         }

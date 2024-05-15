@@ -138,22 +138,84 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seus Pedidos</title>
+    <!-- Integração do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Estilo personalizado -->
+    <style>
+
+.navbar {
+            display: flex;
+            flex-direction: column; /* Para empilhar os itens verticalmente */
+            align-items: center; /* Para centralizar os itens horizontalmente */
+            height: 200px;
+            background-color: #dc3545; /* Vermelho escuro, similar ao bg-danger do Bootstrap */
+            color: white;
+            padding-top: 20px; /* Ajuste para o título ficar mais para baixo */
+        }
+
+        .navbar h1 {
+            margin: 0; /* Remover margens padrão */
+        }
+
+        /* Estilo para os links */
+        .navbar-nav .nav-link {
+            color: white !important; /* Define a cor do texto dos links como branco */
+        }
+
+        /* Estilos personalizados para a página de pedidos */
+img {
+    width: 100px;
+}
+
+/* Exemplo de estilo adicional */
+#btnComprar {
+    margin-top: 20px;
+}
+
+#valorTotal {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+    </style>
 </head>
 <body>
-        <table>
-            <tr>
-            <th>Pedido ID</th>
-            <th>Data da Compra</th>
-            <th>Produto</th>
-            <th>Mensagem</th>
-            <th>Preço Unitário</th>
-            <th>Status</th>
-            <th>Cancelar</th> <!-- Adicionando uma nova coluna para a ação -->
-        </tr>
-        <?php
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="tela.inicial.php">HOME</a>
+                    </li>
+                                    
+                </ul>
+            </div>
+        </div>
+        <h1>Seus Pedidos</h1> 
+    </nav>
+    <div class="container"><br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Pedido ID</th>
+                    <th>Data da Compra</th>
+                    <th>Produto</th>
+                    <th>Mensagem</th>
+                    <th>Preço Unitário</th>
+                    <th>Status</th>
+                    <th>Cancelar</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
             while ($rowDetalhesPedido = $resultDetalhesPedido->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>{$rowDetalhesPedido['pedido_id']}</td>";
@@ -166,20 +228,30 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
                 echo "<td>";
                 echo "<form action='cancelar_pedido.php' method='POST'>";
                 echo "<input type='hidden' name='pedido_id' value='{$rowDetalhesPedido['pedido_id']}'>"; // Envia o ID do pedido via POST
-                echo "<button type='submit' name='cancelar_pedido'>Cancelar Pedido</button>";
+                echo "<button type='submit' name='cancelar_pedido' class='btn btn-danger '  >Cancelar Pedido</button>";
                 echo "</form>";
                 echo "</td>";
                 echo "</tr>";
             }
         ?>
 
-    </table>
-    <?php
+            </tbody>
+        </table><footer class='navbar' style='height:0'></footer><br><br>
+      
+
+
+
+
+
+<?php
         // Consulta para obter o valor total dos pedidos do usuário, considerando apenas os itens não rejeitados
-        $valorTotalQuery = "SELECT SUM(pedidos.valorTotalDoPedido) AS valorTotal 
+        $valorTotalQuery = "SELECT SUM(itens.precoUnitario) AS valorTotal 
         FROM pedidos 
         INNER JOIN itens ON pedidos.id = itens.idPedido
         WHERE pedidos.IdUsuarios = ? AND itens.statusItem = 'aceito'";
+        
+
+    // $valorTotalQuery = "SELECT SUM(valorUnitario) from itens where statusItem = 'aceito'";
         
 
         $stmtValorTotal = $conn->prepare($valorTotalQuery);
@@ -197,15 +269,13 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
             // Verificar se o valor total é maior que zero (ou qualquer outra condição que desejar)
             if ($valorTotal > 0) {
                 // Aqui você coloca o código para o botão
-                echo "<button type='button'>Comprar</button>";
+                echo "<button type='button' class='btn btn-success '>Comprar</button>";
             }
         } else {
             echo "Erro ao calcular o valor total dos pedidos.";
         }
         
 ?>
-
-
 </body>
 </html>
 <?php
@@ -217,6 +287,5 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
     exit;
 }
 ?>
-
 
 

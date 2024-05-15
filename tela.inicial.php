@@ -7,7 +7,11 @@ require_once('db.php');
 
 
 
-
+// Verificar se o usuário está logado
+if (!isset($_SESSION['username'])) {
+  header('location: index.php');
+  exit;
+}
 
 $usuario = "SELECT nome FROM usuariosetec WHERE usuario = '{$_SESSION['username']}'";
 $result = $conn->query($usuario);
@@ -59,7 +63,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APP Food</title>
-  <link rel="stylesheet" href="tela.inicial.css">
+  <link rel="stylesheet" href="telaInicial.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -87,7 +91,7 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
 
     <a href="#">SOBRE</a>
     <a href="carrinho.php">Pedidos</a>
-    <a href="#">SAIR</a>
+    <a href="#">Fale Conosco</a>
 
     <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">CARRINHO</a>
 
@@ -107,14 +111,16 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
         <button id="mn-hamburguer" onclick="toggleMenu()">≣</button>
 
 
-        <div class="navegacao">
-          <a href="#">SOBRE</a>
-          <a href="#">LOGIN</a>
+        <div class="navegacao">      
+          
+          <a href="tela.inicial.php">SOBRE</a>
+          <a href="fale_conosco.php">FALE CONOSCO</a>
+          <a href="carrinho.php">PEDIDOS</a>
           <a href="logout.php">SAIR</a>
 
 
           <button type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight">CARRINHO</button>
+            aria-controls="offcanvasRight" style='border:none;'>CARRINHO</button>
         </div>
 
 
@@ -171,6 +177,8 @@ $queryProdutosDocesFinais = $conn->query($queryProdutosDoces);
 
 
   <main>
+
+  
 
     <h1 style="position: absolute; top: 420px; left: calc(50% - 81.75px); ">Cardapio</h1>
 

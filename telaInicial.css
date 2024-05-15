@@ -40,6 +40,7 @@ header>div {
     margin-right: 10px;
     box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
     border-radius: 15px;
+    z-index: 10;
 }
 
 #conteudoMenuMobile {
@@ -109,12 +110,21 @@ header>div>button {
     top: 157px;
 }
 
+.navegacao{
+    display: flex;
+    gap: 10px;
+}
+
+.navegacao a{
+
+    text-decoration: none;
+}
+
 header>img {
     position: absolute;
     left: 50%;
     top: -1%;
     max-width: 500px;
-  
 }
 
 .cor-carrinho {

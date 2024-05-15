@@ -23,14 +23,48 @@ if (!$result) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração de Pedidos</title>
+    <link rel="stylesheet" href="./adm.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        
+
+        th, td {
+            border: 1px solid #dddddd;
+            background-color:gray;
+            color:white;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: orangered;
+            color: white;
+        }
+
+      
+
+    
+    </style>
 </head>
+
 <body>
-    <h1>Pedidos</h1>
+    <div class="menu">
+        <div>
+            <a id="item_menu" href="adiministrador.php">HOME</a>
+        </div>
+        <div>
+            <p id="bem_vindo" style="font-size: 1.4em;">Pedidos</p>
+        </div>
+    </div>
+
+    <div class="center-table" style="margin-top: 10%; padding-left: 5px;">
     <table border="1">
         <thead>
             <tr>
@@ -42,13 +76,14 @@ if (!$result) {
                 <th>Nome do Produto</th>
                 <th>Status</th>
                 <th>Ações</th>
+                <th>Finalizar</th>
             </tr>
         </thead>
         <tbody>
         <?php while ($row = $result->fetch_assoc()) : ?>
             <tr>
                 <td><?php echo $row['idPedido']; ?></td>
-                <td><?php echo $row['nomeUsuario']; ?></td>
+                <td ><?php echo $row['nomeUsuario']; ?></td>
                 <td><?php echo $row['dataDaCompra']; ?></td>
                 <td><?php echo number_format($row['precoUnitario'], 2, ',', '.'); ?></td>
                 <td><?php echo $row['mensagem']; ?></td>
@@ -57,17 +92,24 @@ if (!$result) {
                 <td>
                     <form action="atualizar_status.php" method="post">
                         <input type="hidden" name="item_id" value="<?php echo $row['idItem']; ?>">
-                        <button type="submit" name="rejeitar">Rejeitar</button>
-                        <button type="submit" name="aceitar">Aceitar</button>
+                        <button type="submit" name="rejeitar" class='btn btn-danger'>Rejeitar</button>
+                        <button type="submit" name="aceitar" id='aceitar' class='btn btn-success'>Aceitar</button>
                     </form>
                 </td>
-                <td><button>Finalizar Pedido</button></td>
+                <td><button class='btn btn-light'>Finalizar Pedido</button></td>
             </tr>
         <?php endwhile; ?>
-        </tbody>
+    </div>
     </table>
+
+    <footer>
+        <div><img src="../imagem/image.png" alt="" style="width: 20%;"></div>
+        <div class="cor"><img src="../imagem/LogoSample_ByTailorBrands.jpg" alt="" style="width: 150px; height: 80px;"></div>
+    </footer>
 </body>
+
 </html>
+
 
 <?php
 $conn->close();

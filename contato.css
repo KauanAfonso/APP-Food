@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+:root {
+    --cor0: #940707;
+    --cor1: #d9d9d9;
+    --cor2: #77b513;
+    --cor3: #4a0000;
+    --cor4: #ababab;
+}
+
+
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image:linear-gradient(to right, rgb(211, 210, 210) ,#7E7676, #5b5757);
+    color: white;
+    
+  
+}
+
+
+.menu {
+    background-image: linear-gradient(to bottom, var(--cor3), #c22a2a);
+    background-repeat: no-repeat;
+    
+    height: 20%;
+    color: white;
+    padding-top: 50px;
+    text-align: center;
+}
+
+#item_menu {
+    margin-left: 5px;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: 10%;
+}
+
+.box {
+    width: 30%;
+    height: 100%;
+    background-color: #f0f0f0;
+    display: inline-block;
+    margin-top: 40px;
+    margin-left: 30px;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.input_msg {
+    width: 30vw;
+    border-radius: 5px;
+    margin: 5px
+}
+
+
+footer {
+    
+    width: 100vw;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+
+    
+}
+.cor{
+    background-image: linear-gradient(to bottom, var(--cor3), #c22a2a);
+    background-repeat: no-repeat;
+    line-height: 50px;
+    color: white;
+}

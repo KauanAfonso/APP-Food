@@ -12,10 +12,15 @@ require_once('db.php');
     <!-- Integração do Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+
+        *{
+            margin: 0;
+            padding:0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 0;
             padding: 20px;
         }
         /* Estilo para a tabela */
@@ -37,9 +42,7 @@ require_once('db.php');
             background-color: #343a40; /* Preto */
             color: #fff; /* Texto branco */
         }
-        tr:nth-child(even) {
-            background-color: #f8f2f2; /* Cinza */
-        }
+       
         /* Estilo para os botões */
         .btn-excluir {
             background-color: #dc3545; /* Vermelho */
@@ -51,9 +54,42 @@ require_once('db.php');
         .btn-excluir:hover {
             background-color: #c82333; /* Vermelho mais escuro no hover */
         }
+
+            
+        .menu {
+            background: linear-gradient(to left, black, #3a3939, black);
+            color: white;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .menu a:hover {
+            color: #dddddd;
+        }
+
+        .menu p {
+            font-size: 1.4em;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
+
+<div class="menu">
+    <a href="adiministrador.php">HOME</a>
+    <p>Editar Produto</p>
+</div>
+
 
 <div class="container">
     <h2>Lista de Produtos</h2>
