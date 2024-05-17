@@ -1,6 +1,11 @@
 <?php 
 session_start();
 require_once('db.php');
+
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,54 +15,145 @@ require_once('db.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Novo Produto</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        form {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-            margin: 20px auto;
-        }
-        input[type="text"] {
-            width: calc(100% - 20px);
-            margin: 5px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
+
+
+*{
+    margin:0;
+    padding:0;
+}
+
+        .menu {
+    background: linear-gradient(to left, black, #3a3939, black);
+    color: white;
+    padding: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #dddddd;
+}
+
+.menu p {
+    font-size: 1.4em;
+    margin: 10px 0;
+}
+
+form {
+
+    background-color: black;
+    padding: 90px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height:500px;
+    width: 500px;
+    margin: 0 auto;
+    color: white;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+input[type="text"], select {
+    
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    
+}
+
+select {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    
+}
+
+input[type="text"]::placeholder, select::placeholder {
+    color: #dddddd;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.btn-outline-dark {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn-outline-dark:hover {
+    background-color: #ddd;
+}
+
+.footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
             width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
         }
-    </style>
+
+</style>
+
 </head>
 <body>
+
+<div class="menu">
+    <a href="adiministrador.php">HOME</a>
+    <p>BEM VINDO ADMINISTRADOR!</p>
+</div>
     
 <form action="" method="POST">
     <h2>Cadastrar Novo Produto</h2>
     <input type="text" name="nameProduto" id="nameProduto" placeholder="Digite o nome do produto">
-    <select name="DescricaoProduto" class="btn btn-outline-dark dropdown-toggle btn-sm text-start">
+    <select name="categoriaProduto" class="btn btn-outline-dark dropdown-toggle btn-sm text-start">
         <option value="Lanches">Lanches</option>
         <option value="Pasteis">Pateis</option>
         <option value="Batatas">Batatas</option>
         <option value="Doces">Doces</option>
         <option value="Salgados">Salgados</option>
     </select>
-    <input type="text" name="categoriaProduto" id="categoriaProduto" placeholder="Digite a categoria do produto">
+    <input type="text" name="DescricaoProduto" id="DescricaoProduto" placeholder="Digite a descricao do produto">
     <input type="text" name="FotoProduto" id="fotoProduto" placeholder="Digite a URL da foto do produto">
-    <input type="text" name="precoProduto" id="precoProduto" placeholder="Digite o preço do produto (12.99)">
+    <input type="text" name="precoProduto" id="precoProduto" placeholder="Digite o preço do produto (12.99)"><br><br>
     <input type="submit" value="Cadastrar">
 </form>
 
@@ -86,5 +182,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<div class="footer">
+    <p>&copy; 2024 APP_FOOD</p>
+</div>
 </body>
 </html>

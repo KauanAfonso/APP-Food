@@ -2,6 +2,15 @@
 session_start();
 require_once('db.php');
 
+
+
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+
+
 // Verifica se o ID do produto foi passado na URL
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $idProduto = $_GET['id'];

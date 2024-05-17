@@ -65,10 +65,15 @@ div {
 }
 #container-b {
     background-color: white;
-    background-image: url(imagem/tela_login/etec_logon.jpg);
     
     border-radius: 0px 10px 10px 0px;
 
+}
+
+#container-b img{
+    margin-top: 30%;
+    margin-left: 4%;
+    max-width: 350px;
 }
 
 

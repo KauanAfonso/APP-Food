@@ -152,7 +152,7 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
             flex-direction: column; /* Para empilhar os itens verticalmente */
             align-items: center; /* Para centralizar os itens horizontalmente */
             height: 200px;
-            background-color: #dc3545; /* Vermelho escuro, similar ao bg-danger do Bootstrap */
+            background-image: linear-gradient(to bottom, #4a0000, #c22a2a);
             color: white;
             padding-top: 20px; /* Ajuste para o título ficar mais para baixo */
         }
@@ -237,6 +237,9 @@ img {
 
             </tbody>
         </table><footer class='navbar' style='height:0'></footer><br><br>
+
+
+  
       
 
 
@@ -280,7 +283,8 @@ img {
 </html>
 <?php
     } else {
-        echo "Nenhum pedido encontrado para este usuário.";
+        echo "Nenhum pedido encontrado para este usuário. <br>";
+        echo"<a href='tela.inicial.php'>Voltar</a>";
     }
 } else {
     echo "Erro ao obter o ID do usuário.";

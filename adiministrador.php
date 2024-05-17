@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+require('db.php');
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,6 +118,11 @@
         <img src="https://acrediteounao.com/wp-content/uploads/2018/12/AN-batata-frita-batatas-fritas.jpg" alt="Imagem do card 3">
         <h2 class="card-title">Excluir Produto</h2>
         <a href="ExcluirProduto.php" class="btn btn-dark">Excluir Produto</a>
+    </div>
+    <div class="card">
+        <img src="https://riotfest.org/wp-content/uploads/2016/10/sdfl.jpg" alt="Imagem do card 3">
+        <h2 class="card-title">Criar Produtos</h2>
+        <a href="CriarProdutos.php" class="btn btn-dark">Criar Produtos</a>
     </div>
     <div class="card">
         <img src="https://static.vecteezy.com/system/resources/previews/000/592/782/original/vector-message-icon.jpg" alt="Imagem do card 4">

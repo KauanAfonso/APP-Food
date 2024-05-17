@@ -1,6 +1,16 @@
 <?php
 session_start();
 require_once('db.php');
+
+
+
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+
+
 ?>
 
 <!DOCTYPE html>

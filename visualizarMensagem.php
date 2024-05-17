@@ -1,6 +1,14 @@
 <?php
 require_once('db.php');
 
+session_start();
+
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+
 // Consulta para obter todas as mensagens
 $sql = "SELECT mensagens.*, usuariosetec.nome, usuariosetec.usuario FROM mensagens INNER JOIN usuariosetec ON mensagens.idUsuario = usuariosetec.id";
 $result = $conn->query($sql);

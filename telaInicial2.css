@@ -184,7 +184,7 @@ main h1{
 
 
 footer {
-    background-image: linear-gradient(to top, var(--cor0), #c22a2a);
+    background-image: linear-gradient(to bottom, #c22a2a,var(--cor3));
     bottom: 0;
     position: fixed;
     width: 100vw;
@@ -193,7 +193,9 @@ footer {
     text-align: center;
     color: white;
     text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
+    margin: 15px 0 0 0;
 }
+
 
 
 @keyframes fadeInOut {

@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+require('db.php');
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -66,8 +77,7 @@ img{
                 </thead>
                 <tbody>
                     <?php
-                    session_start();
-                    require_once('db.php');
+                
 
                     $query = "SELECT * FROM produtos";
                     $result = $conn->query($query);

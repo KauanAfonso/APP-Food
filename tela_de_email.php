@@ -56,10 +56,24 @@ $conn->close();
     </div>
 </body>
 
-<footer>
-    <div><img src="imagem/image.png" alt="" style="width: 20%;"></div>
-    <div class="cor">oi</div>
-</footer>
+<footer><br><br>
+    <div><img src="imagem/logo.png" alt="" style="width: 5%;"></div>
+   
+
+    <style>
+        footer {
+    background-image: linear-gradient(to bottom, #c22a2a,var(--cor3));
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100px;
+    padding: 1px 0px 5px 0px;
+    text-align: center;
+    color: white;
+    text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
+    margin: 15px 0 0 0;
+}
+    </style>
 
 </html>
 

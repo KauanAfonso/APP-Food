@@ -1,5 +1,14 @@
 <?php
 require_once('db.php');
+session_start();
+
+
+
+if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
+    header('location: index.php');
+}
+
+
 
 $query = "SELECT pedidos.id AS idPedido, 
                  usuariosetec.nome AS nomeUsuario, 
@@ -102,10 +111,30 @@ if (!$result) {
     </div>
     </table>
 
-    <footer>
-        <div><img src="../imagem/image.png" alt="" style="width: 20%;"></div>
-        <div class="cor"><img src="../imagem/LogoSample_ByTailorBrands.jpg" alt="" style="width: 150px; height: 80px;"></div>
-    </footer>
+    <footer><br><br>
+    <div><img src="imagem/logo.png" alt="" style="width: 4%;"></div>
+   
+
+    <style>
+        footer {
+            background-image:linear-gradient(to left,black, #3a3939, black);
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100px;
+    padding: 0px 0px 50px 0px;
+    text-align: center;
+    color: white;
+    text-shadow: 10px 5px 10px rgba(0, 0, 0, 0.301);
+    margin: 15px 0 0 0;
+}
+
+footer img{
+
+    margin-bottom:10px;
+
+}
+    </style>
 </body>
 
 </html>
