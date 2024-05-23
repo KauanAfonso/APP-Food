@@ -29,7 +29,7 @@ require_once('db.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APP Food</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="loginn.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -67,7 +67,7 @@ require_once('db.php');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-    if(!empty($_POST['name']) && !empty($_POST['username']) && !empty($_POST['nsa']) && !empty($_POST['password']) && !empty($_POST['tipo'])   ){
+    if(!empty($_POST['name']) && !empty($_POST['username']) && !empty($_POST['nsa']) && !empty($_POST['password']) ){
     $name = $_POST['name'];
     $username = $_POST['username'];
     $nsa = $_POST['nsa'];
@@ -98,7 +98,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 </div>
             </div>
             <div id="container-b">
-             
+                <img src="logoAPPfood.jpeg" alt="" >
+                <h5 style="position: absolute; top: 462px; left: 52%;" id="criarConta">clique aqui para Logar <a style="color: red;" href="./index.php">Clique aqui</a> </h6>
             </div>
         </div>
     </main>

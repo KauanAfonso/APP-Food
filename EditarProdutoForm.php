@@ -57,6 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             text-align: center;
         }
 
+        form{
+            background:black !important;
+            border:solid 2px black;
+            color:white;
+            padding:50px;
+            border-radius:20px
+        }
+
         .menu a {
             color: white;
             text-decoration: none;
@@ -73,7 +81,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             font-size: 1.4em;
             margin: 10px 0;
         }
-    </style>
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -119,6 +137,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             </form>
         </div>
     </div>
+</div>
+<div class="footer">
+    <p>&copy; 2024 APP_FOOD</p>
 </div>
 
 </body>

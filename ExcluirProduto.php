@@ -97,7 +97,7 @@ if(!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin'){
 
 <div class="menu">
     <a href="adiministrador.php">HOME</a>
-    <p>Editar Produto</p>
+    <p>Excluir Produto</p>
 </div>
 
 
