@@ -142,6 +142,7 @@ if ($resultUsuarioId && $resultUsuarioId->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seus Pedidos</title>
+ 
     <!-- Integração do Bootstrap -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Estilo personalizado -->
@@ -265,20 +266,60 @@ img {
 
         if ($resultValorTotal && $rowValorTotal = $resultValorTotal->fetch_assoc()) {
             $valorTotal = $rowValorTotal['valorTotal'];
-            // Formatar o valor para exibir apenas duas casas decimais após a vírgula
-            $valorTotalFormatado = number_format($valorTotal, 2, ',', '.');
-            echo "<h3>Valor total: R$ $valorTotalFormatado</h3>";
-            
-            // Verificar se o valor total é maior que zero (ou qualquer outra condição que desejar)
+            // Remova a formatação aqui
+            echo "<h3>Valor total: R$ " . number_format($valorTotal, 2, ',', '.') . "</h3>";
+        
+            echo "<form action='mercadoPago.php' method='post'>
+            <input type='hidden' id='valor' name='valor' value='$valorTotal'>"; // Remova a formatação aqui também
+        
             if ($valorTotal > 0) {
                 // Aqui você coloca o código para o botão
-                echo "<button type='button' class='btn btn-success '>Comprar</button>";
+                echo "<button type='submit' id='pagar' class='btn btn-success'>Comprar</button>";
             }
+            echo "</form>";
         } else {
             echo "Erro ao calcular o valor total dos pedidos.";
         }
         
 ?>
+
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<script>
+        const mp = new MercadoPago('TEST-7c7ed139-9ae3-4c82-a90d-de57e02d0218', { locale: 'pt-BR' });
+
+document.getElementById('pagar').addEventListener('click', function() {
+    
+  valor = document.getElementById('valor').value
+  console.log(valor)    
+  fetch('mercadoPago.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      transaction_amount: valor, // Valor da transação
+      description: 'Seu(s) produto(s)!',
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    mp.checkout({
+      preference: {
+        id: data.preference_id
+      }
+    });
+  })
+  .catch(error => {
+    console.error('Erro ao criar a preferência de pagamento:', error);
+  });
+});
+
+
+    </script>
+
+
+
 </body>
 </html>
 <?php
