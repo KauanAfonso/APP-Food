@@ -4,7 +4,7 @@
 
 Com integração com o **Mercado Pago** para pagamentos online, CRUD de produtos e a possibilidade de o administrador aceitar ou recusar pedidos, o APP-Food é uma solução completa para a gestão de pedidos em restaurantes e estabelecimentos alimentícios.
 
-![Logo do APP-Food](assets/logo-app-food.png)  <!-- Substitua com o caminho correto da imagem -->
+![tela do APP-Food](imagens/home.png)  <!-- Substitua com o caminho correto da imagem -->
 
 ## 💡 Funcionalidades
 
@@ -53,9 +53,21 @@ O administrador pode visualizar todos os pedidos realizados, com a opção de ac
 
 Aqui estão algumas capturas de tela do projeto em funcionamento:
 
-![Tela Principal](assets/tela-principal.png)  <!-- Substitua com o caminho correto da imagem -->
+![tela do APP-Food](imagens/home1.png)  <!-- Substitua com o caminho correto da imagem -->
 
-![Carrinho de Compras](assets/carrinho.png)  <!-- Substitua com o caminho correto da imagem -->
+![Carrinho de Compras](imagens/carrinho.png)  <!-- Substitua com o caminho correto da imagem -->
 
-![Admin - Gestão de Pedidos](assets/admin-pedidos.png)  <!-- Substitua com o caminho correto da imagem -->
+![Admin - Gestão de Pedidos](imagens/admin.png)  <!-- Substitua com o caminho correto da imagem -->
+
+![Admin - Gestão de Pedidos](imagens/pedidos.png)  <!-- Substitua com o caminho correto da imagem -->
+
+
+
+## 🎉 Melhorias Futuras
+### 1. **Melhorar estruturação de arquivos**
+### 2. **Responsividade total**
+### 3. **Melhorar Segurança do sistema**
+### 4. **Refatoração de códgios**
+
+
 
